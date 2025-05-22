@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BLZstarss</title>
+  <style>
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #121212;
+      color: #eee;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Style du titre */
+    .titre-haut {
+      font-size: 3rem;
+      font-weight: bold;
+      text-shadow:
+        0 0 5px #ff0000,
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 40px #ff0000;
+      user-select: none;
+      margin: 0 0 30px 0;
+      text-align: center;
+      z-index: 1;
+    }
+    header {
+      background: #1b1b1b;
+      color: #d32f2f;
+      padding: 25px 15px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 3px;
+      text-shadow: 0 0 8px #d32f2faa;
+      user-select: none;
+      border-bottom: 3px solid #d32f2f;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #1b1b1b;
+      box-shadow: inset 0 -3px 6px #d32f2f55;
+      border-bottom: 2px solid #d32f2f;
+    }
+    nav button {
+      flex: 1;
+      max-width: 200px;
+      background: transparent;
+      border: none;
+      padding: 18px 0;
+      color: #bbb;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      border-bottom: 3px solid transparent;
+      letter-spacing: 0.04em;
+      user-select: none;
+    }
+    nav button:hover:not(.active) {
+      background-color: #d32f2f22;
+      color: #ffb74d;
+    }
+    nav button.active {
+      background-color: #d32f2f11;
+      color: #ffc107;
+      border-bottom: 3px solid #ffc107;
+      cursor: default;
+      font-weight: 700;
+      text-shadow: 0 0 6px #ffc107bb;
+    }
+
+    main {
+      flex-grow: 1;
+      max-width: 960px;
+      width: 95%;
+      margin: 30px auto 40px;
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 25px 30px;
+      box-shadow: 0 10px 25px rgb(211 47 47 / 0.4);
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    section {
+      display: none;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(15px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    h2 {
+      text-align: center;
+      color: #d32f2f;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 25px;
+      letter-spacing: 0.06em;
+      text-shadow: 0 0 6px #d32f2fcc;
+    }
+
+    /* Accueil */
+    #accueil p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      text-align: justify;
+      color: #ddd;
+      max-width: 900px;
+      margin: 0 auto;
+      letter-spacing: 0.02em;
+    }
+
+    /* Vidéos */
+    #videos .video-item {
+      background: #292929;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      padding: 18px 22px;
+      box-shadow: 0 2px 10px rgb(211 47 47 / 0.15);
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border-left: 5px solid transparent;
+      user-select: none;
+    }
+    #videos .video-item:hover {
+      box-shadow: 0 6px 20px rgb(211 47 47 / 0.5);
+      transform: translateY(-3px);
+      border-left-color: #ffc107;
+      background: #3b2c1d;
+    }
+    .video-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #ffc107;
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+      text-shadow: 0 0 5px #ffc107cc;
+    }
+    .video-info {
+      font-size: 0.95rem;
+      color: #aaa;
+      font-style: italic;
+      margin-bottom: 10px;
+      user-select: text;
+    }
+    .video-summary {
+      font-size: 1rem;
+      color: #eee;
+      line-height: 1.55;
+      border-left: 4px solid #d32f2f;
+      padding-left: 14px;
+      display: none;
+      margin-top: 8px;
+      user-select: text;
+      background: #3d2121;
+      border-radius: 6px;
+      text-shadow: 0 0 3px #d32f2f88;
+    }
+    .video-item.open .video-summary {
+      display: block;
+      animation: slideDownFade 0.3s ease forwards;
+    }
+
+    @keyframes slideDownFade {
+      from {opacity: 0; max-height: 0;}
+      to {opacity: 1; max-height: 500px;}
+    }
+
+    /* Discord */
+    #discord p {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #ffc107;
+      text-align: center;
+      margin-bottom: 18px;
+      text-shadow: 0 0 4px #ffc107aa;
+    }
+    #discord a {
+      display: inline-block;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #d32f2f;
+      text-decoration: none;
+      border: 2px solid #d32f2f;
+      padding: 12px 22px;
+      border-radius: 30px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+      box-shadow: 0 0 12px #d32f2faa;
+    }
+    #discord a:hover {
+      background-color: #d32f2f;
+      color: white;
+      box-shadow: 0 0 18px #ff5757;
+    }
+
+    #reglement {
+      max-width: 880px;
+      height: 340px;
+      margin: 0 auto 25px;
+      padding: 20px 25px;
+      border-radius: 15px;
+      background: #222;
+      border: 1.8px solid #d32f2f;
+      color: #eee;
+      font-size: 0.98rem;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      box-shadow: inset 0 0 8px #d32f2f99;
+      user-select: text;
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+      text-shadow: 0 0 1px #000;
+    }
+    #reglement::-webkit-scrollbar {
+      width: 10px;
+    }
+    #reglement::-webkit-scrollbar-thumb {
+      background-color: #d32f2f;
+      border-radius: 8px;
+      box-shadow: inset 0 0 6px #ff7878;
+    }
+    #reglement::-webkit-scrollbar-track {
+      background: #2c2c2c;
+      border-radius: 8px;
+    }
+
+    #accept-btn {
+      display: block;
+      margin: 0 auto;
+      background-color: #ffc107;
+      color: #3e2723;
+      font-weight: 800;
+      font-size: 1.15rem;
+      padding: 13px 32px;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 10px #ffc107aa;
+      letter-spacing: 0.05em;
+    }
+    #accept-btn:hover:not(:disabled) {
+      background-color: #ffb300;
+      box-shadow: 0 0 20px #ffdb4d;
+    }
+    #accept-btn:disabled {
+      background-color: #555;
+      color: #aaa;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    #accepted-msg {
+      text-align: center;
+      margin-top: 18px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #4caf50;
+      text-shadow: 0 0 4px #4caf5077;
+    }
+
+    /* Accessibility */
+    nav button:focus-visible,
+    #accept-btn:focus-visible,
+    .video-item:focus-visible {
+      outline: 3px solid #ffc107;
+      outline-offset: 3px;
+    }
+
+    /* Responsive */
+    @media (max-width: 560px) {
+      .titre-haut {
+        font-size: 2.2rem;
+      }
+      nav button {
+        font-size: 1rem;
+        padding: 15px 0;
+      }
+      main {
+        padding: 20px 15px;
+      }
+    }
+  </style>
+</head>
+<head>
+  <link rel="icon" href="channels4_profile.jpg" type="image/png" />
+
+</head>
+<body>
+  
+  <h1 class="titre-haut" aria-label="BLZstarss, site officiel, faites confiance à BLZstarss">DEV BY: me._.4mel</h1>
+
+  <nav aria-label="Navigation principale">
+    <button id="btn-accueil" class="active" aria-current="page" onclick="showPage('accueil')">Accueil</button>
+    <button id="btn-videos" aria-current="false" onclick="showPage('videos')">Vidéos</button>
+    <button id="btn-discord" aria-current="false" onclick="showPage('discord')">Discord</button>
+  </nav>
+
+  <main tabindex="-1">
+    <section id="accueil" class="active" aria-hidden="false" tabindex="-1" aria-label="Section Accueil">
+      <p>
+        Bienvenue sur BLZstarss, votre destination incontournable pour la découverte de contenus vidéo uniques et captivants. Que vous soyez un passionné de vidéos d’analyse, un curieux à la recherche de nouveautés, ou simplement quelqu’un qui aime s’informer de manière approfondie, vous êtes au bon endroit.
+
+        Notre site a été conçu pour offrir une expérience riche et immersive autour de thématiques variées, allant des enquêtes détaillées aux critiques pertinentes en passant par des documentaires passionnants. Chaque vidéo présentée est sélectionnée avec soin afin de vous proposer un contenu de qualité, rigoureux et toujours intéressant.
+        
+        En explorant BLZstarss, vous découvrirez une vaste bibliothèque de vidéos qui couvrent un large éventail de sujets actuels, culturels, et parfois même controversés. Notre objectif est de vous permettre de comprendre les enjeux derrière les événements, d’éclairer certains mystères et de vous faire découvrir des perspectives que vous n’auriez peut-être pas envisagées.
+        
+        Mais BLZstarss, ce n’est pas seulement un site de vidéos. C’est aussi une communauté dynamique et engagée. En effet, nous mettons à votre disposition un serveur Discord où vous pouvez échanger directement avec d’autres passionnés, poser vos questions, partager vos opinions et participer à des discussions enrichissantes. Ce lieu d’échange est parfait pour rencontrer des personnes qui partagent vos centres d’intérêt et pour rester informé des dernières nouveautés et événements.
+        
+        Notre interface simple et intuitive vous permet de naviguer facilement entre les différentes sections. Que vous souhaitiez parcourir les vidéos récentes, découvrir des analyses approfondies, ou rejoindre notre communauté sur Discord, tout est pensé pour que votre visite soit agréable et productive.
+        
+        Nous croyons fermement que l’information de qualité est essentielle pour mieux comprendre le monde qui nous entoure. C’est pourquoi chaque contenu que nous proposons est le fruit d’un travail rigoureux de recherche et de réflexion. Nous nous engageons à vous fournir des vidéos qui non seulement divertissent, mais aussi vous enrichissent intellectuellement.
+        
+        Que vous soyez un visiteur occasionnel ou un membre actif, BLZstarss vous offre une plateforme où la curiosité est encouragée et où la découverte est au cœur de chaque interaction. Nous vous invitons à explorer nos différentes rubriques, à visionner nos contenus et à prendre part à cette aventure collective.
+        
+        Merci de faire partie de BLZstarss. Ensemble, faisons grandir cette communauté, partageons nos idées et continuons à apprendre chaque jour un peu plus grâce à des vidéos de qualité.
+        
+        N’hésitez pas à nous faire part de vos retours, suggestions ou demandes. Votre avis est précieux pour nous aider à améliorer continuellement le site et vous offrir toujours plus de contenu passionnant.
+        
+        Bonne visite et à très vite sur BLZstarss, le site où la découverte, l’analyse et la communauté se rencontrent pour vous offrir le meilleur du web vidéo.
+      </p>
+    </section>
+
+    <section id="videos" aria-hidden="true" tabindex="-1" aria-label="Section Vidéos">
+      
+      <div id="videoList" role="list" aria-label="Liste des vidéos">
+        <!-- Les vidéos seront insérées ici dynamiquement -->
+      </div>
+    </section>
+
+    <section id="discord" aria-hidden="true" tabindex="-1" aria-label="Section Discord">
+      <h2>Discord</h2>
+      <p>Merci de lire le règlement du serveur avant d'accepter :</p>
+      <div id="reglement" role="region" aria-live="polite" aria-atomic="true" tabindex="0">
+
+**Acceptez le règlement de BLZstarss pour accéder à l'intégralité du serveur**
+
+**SYSTÈME D'AVERTISSEMENTS**  
+Quand vous recevez une sanction ou que vous avez fait quelque chose de pas très grave, vous recevez un warn. Tous les 5 warns, vous prendrez 1 jour d’exclusion. Si votre nombre de warns devient trop élevé, le staff peut voir pour vous bannir.
+
+**ATTENTION**  
+Sachez d’avance qu’un staff peut vous mettre une sanction pour quelque chose qui n’est pas dans le règlement, mais qui paraît évident (parler de cannibalisme, de camps de concentration, etc.).
+
+**ATTENTION 2**  
+Si vous n’avez pas accepté ce règlement, la sanction est doublée.
+
+**INSULTES**  
+Les insultes sont plus ou moins interdites sur le serveur en fonction du nombre et de la gravité de l’insulte. Par exemple, « pu!ain de merde » ne sera pas sanctionné, mais « va te faire v!oler sale encu!er » sera sanctionné. Les sanctions peuvent aller de 1 heure à 1 semaine (+1 avertissement).
+
+**PUBLICITÉ**  
+La publicité en dehors du salon de publicité est punissable d’un avertissement (et d’une heure d’exclusion si c’est en message privé) (+1 avertissement).
+
+**CONTENU SEXUEL**  
+Tout contenu ayant référence au sexe sera puni d’une heure d’exclusion pour les cas les moins graves (parler de parties génitales) et d’un ban définitif pour les cas les plus graves (vidéos).
+
+**PROFILS**  
+Les profils doivent être respectueux. Les insultes sont autorisées tant qu’elles ne sont pas trop graves, mais le contenu sexuel et gore ne doit pas apparaître dans ce genre de profils, ni les références aux époques sombres de l’histoire sauf s’il s’agit de simples blagues. Cela peut entraîner un ban si vous refusez de changer votre profil.
+
+**CONTENU VIOLENT**  
+Les vidéos gores ou incluant du sang sont interdites. Si vous en envoyez une, vous serez banni. Si c’est un dessin, le sang est autorisé, mais des dessins trop violents peuvent entraîner jusqu’à 1 jour d’exclusion (+1 avertissement).
+
+**SPAM**  
+Le spam est interdit. Vous pouvez prendre un avertissement si vous spammez.
+
+**POLITIQUE & religions**  
+Parler de politique et de religions est autorisé, mais veuillez ne faire aucune incitation à quoi que ce soit, sinon vous prendrez instantanément 1 jour d’exclusion (+1 avertissement).
+
+**TROLL**  
+Le troll méchant et répétitif est interdit et peut aller jusqu’à 1 jour d’exclusion (+1 avertissement).
+
+**DISCRIMINATION**  
+La discrimination est interdite sur le serveur. Vous pouvez recevoir une exclusion d’une semaine jusqu’à un ban définitif.
+
+**HUMOUR NOIR**  
+L’humour noir est autorisé, mais à ne pas en abuser sous peine de recevoir un avertissement.
+
+**USURPATION D'IDENTITÉ**  
+L’usurpation d’identité est interdite et peut entraîner 1 jour d’exclusion, puis 1 semaine, et un ban si la personne continue.
+
+**LES MENTION**  
+Faire un @ sur un modo ou BLZ est autorisé, mais si vous en abusez ou que c’est inutile, vous pouvez prendre 1 heure d’exclusion et 1 avertissement.
+
+**Divulgation**  
+La divulgation d’informations personnelles non consentie est interdite et entraîne un ban.
+
+**SPOIL**  
+Le spoil est interdit. Vous pouvez prendre un avertissement pour cela.
+
+**Application des Conditions d'Utilisation de Discord**  
+Les Conditions d'Utilisation (ToS) de Discord s'appliquent également sur ce serveur. Bien que nous encouragions une certaine flexibilité dans les interactions, tous les membres doivent respecter ces règles pour garantir un environnement sûr et agréable pour l'ensemble de la communauté. Une violation des ToS peut entraîner des sanctions proportionnelles à la gravité de l'infraction.
+
+---
+
+Pour accepter le règlement du serveur, veuillez interagir avec le bouton ci-dessous !
+
+      </div>
+      <button id="accept-btn" onclick="acceptReglement()" aria-pressed="false">J'accepte le règlement</button>
+      <div id="accepted-msg" style="display:none;" aria-live="assertive" aria-atomic="true">Merci d'avoir accepté le règlement ! Vous allez être redirigé…</div>
+    </section>
+  </main>
+
+  <script>
+    // Données vidéos d'exemple
+  
+    const videos = [
+  {
+    title: "La Chute Inévitable de Dream...",
+    views: "17 k vues",
+    date: "18/05/2025",
+    summary: "Analyse des raisons qui mènent à la chute programmée de Dream, la star de YouTube, en mettant en lumière ses erreurs et ses controverses récentes."
+  },
+  {
+    title: "Le Problème avec Studio Bubble Tea...",
+    views: "49 k vues",
+    date: "14/05/2025",
+    summary: "Critique du Studio Bubble Tea et des défauts cachés derrière ses productions qui déçoivent de plus en plus les fans."
+  },
+  {
+    title: "Cyprien n'a Jamais Chuté...",
+    views: "52 k vues",
+    date: "10/05/2025",
+    summary: "Discussion sur l’incroyable constance de Cyprien, qui malgré les aléas du web, ne semble jamais perdre sa popularité."
+  },
+  {
+    title: "Pokimane est Hypocrite ?",
+    views: "46 k vues",
+    date: "01/05/2025",
+    summary: "Enquête et accusations d'hypocrisie autour de Pokimane, avec des exemples précis de ses contradictions publiques."
+  },
+  {
+    title: "La Vérité sur la Mère de Swan et Néo...",
+    views: "64 k vues",
+    date: "21/04/2025",
+    summary: "Révélations sur la mère de Swan et Néo, révélant des détails personnels jusque-là inconnus du public."
+  },
+  {
+    title: "Où est Passé Alan FoodChallenge ?",
+    views: "50 k vues",
+    date: "19/04/2025",
+    summary: "Analyse de la disparition d’Alan FoodChallenge des réseaux, entre choix personnels et pressions externes."
+  },
+  {
+    title: "Pourquoi Hugoposé a Chuté ? (selon moi)",
+    views: "44 k vues",
+    date: "17/04/2025",
+    summary: "Point de vue personnel sur la raison de la chute d’Hugoposé, entre erreurs de communication et perte d'audience."
+  },
+  {
+    title: "(+13) L'horreur Cachée derrière les Shorts YouTube...",
+    views: "50 k vues",
+    date: "15/04/2025",
+    summary: "Explication des dangers et aspects cachés des Shorts YouTube, souvent ignorés par les utilisateurs."
+  },
+  {
+    title: "Le Milliardaire Détesté d'Internet...",
+    views: "21 k vues",
+    date: "14/04/2025",
+    summary: "Portrait d’un milliardaire très controversé, détesté par la communauté internet pour ses actes."
+  },
+  {
+    title: "La Chute Méritée de Lama Fâché...",
+    views: "221 k vues",
+    date: "13/04/2025",
+    summary: "Récit de la chute de Lama Fâché, jugée méritée après une série de mauvais choix."
+  },
+  {
+    title: "L'histoire et les Scandales de Michou...",
+    views: "32 k vues",
+    date: "12/04/2025",
+    summary: "Retour sur les scandales qui ont marqué la carrière de Michou."
+  },
+  {
+    title: "Le plus gros Détraqué d'internet...",
+    views: "61 k vues",
+    date: "12/04/2025",
+    summary: "Portrait d’un individu très controversé qui choque la communauté internet par son comportement."
+  },
+  {
+    title: "Faut qu'on parle...",
+    views: "21 k vues",
+    date: "11/04/2025",
+    summary: "Vidéo personnelle où l’auteur aborde des sujets sensibles et importants à discuter."
+  },
+  {
+    title: "L'entreprise qui Manipule des TikTokeurs...",
+    views: "25 k vues",
+    date: "10/03/2025",
+    summary: "Enquête sur une entreprise qui manipule des créateurs TikTok pour son profit."
+  },
+  {
+    title: "Le Groupe Roblox qui Cache un FOU...",
+    views: "62 k vues",
+    date: "08/03/2025",
+    summary: "Révélations sur un groupe Roblox dirigé par une personne à problème mental."
+  },
+  {
+    title: "(13+) Sophie Rain est une Prostituée...",
+    views: "116 k vues",
+    date: "05/02/2025",
+    summary: "Accusations graves envers Sophie Rain, vidéo pour public averti."
+  },
+  {
+    title: "(13+) Cette Streameuse a Dérapé... (2/2)",
+    views: "56 k vues",
+    date: "03/02/2025",
+    summary: "Analyse des dérapages publics d’une streameuse controversée."
+  },
+  {
+    title: "Nasdas est Dangereux ?!",
+    views: "37 k vues",
+    date: "01/02/2025",
+    summary: "Enquête sur la dangerosité de Nasdas, créateur au comportement problématique."
+  },
+  {
+    title: "(13+) La Yandere M*urtrière Adorée...",
+    views: "37 k vues",
+    date: "01/02/2025",
+    summary: "Portrait d’une figure yandere admirée malgré son passé violent."
+  },
+  {
+    title: "Le plus gros Drama de l'année...",
+    views: "43 k vues",
+    date: "01/01/2025",
+    summary: "Résumé du plus gros scandale de l'année écoulée."
+  },
+  {
+    title: "Le Prochain GTA ne Sauvera pas LaSalle...",
+    views: "43 k vues",
+    date: "01/01/2025",
+    summary: "Discussion critique sur l’avenir de LaSalle avec la sortie du prochain GTA."
+  },
+  {
+    title: "La fin Inévitable d'Overspes...",
+    views: "58 k vues",
+    date: "01/01/2025",
+    summary: "Analyse de la fin annoncée de Overspes."
+  },
+  {
+    title: "(13+) L'application où tu peux Voir des **** Dessinés...",
+    views: "157 k vues",
+    date: "01/12/2024",
+    summary: "Exposition d’une application controversée avec contenu inapproprié."
+  },
+  {
+    title: "La Pire Chute du YouTube Français...",
+    views: "24 k vues",
+    date: "01/12/2024",
+    summary: "Analyse d’une des plus grosses chutes chez les YouTubers français."
+  },
+  {
+    title: "Comment Laupok en est-t'il arrivé là ?",
+    views: "35 k vues",
+    date: "01/12/2024",
+    summary: "Retour sur le parcours difficile de Laupok."
+  },
+  {
+    title: "(13+) La Pire Streameuse ? (Racisme, etc..) (1/2)",
+    views: "110 k vues",
+    date: "01/12/2024",
+    summary: "Décryptage des controverses autour d’une streameuse très critiquée."
+  },
+  {
+    title: "(13+) La Folle Instable de Gacha Life...",
+    views: "78 k vues",
+    date: "01/11/2024",
+    summary: "Portrait d’une personnalité instable dans l’univers Gacha Life."
+  },
+  {
+    title: "(13+) Voici Pourquoi Cette Personne est Très Dangereuse...",
+    views: "208 k vues",
+    date: "01/11/2024",
+    summary: "Explication des raisons qui rendent cette personne dangereuse."
+  },
+  {
+    title: "La Chute Méritée de Noa...",
+    views: "235 k vues",
+    date: "01/11/2024",
+    summary: "Analyse de la chute de Noa, largement méritée."
+  },
+  {
+    title: "La fois où tout le monde s'est fait Manipulé 2...",
+    views: "21 k vues",
+    date: "01/09/2024",
+    summary: "Deuxième partie d’une série sur une manipulation massive du public."
+  },
+  {
+    title: "Pourquoi Hyra est Considéré comme un TARÉ !? (1/2)",
+    views: "111 k vues",
+    date: "01/09/2024",
+    summary: "Premières révélations sur Hyra et son comportement choquant."
+  },
+  {
+    title: "Ce que je Vous ai Caché sur NUFFI...",
+    views: "19 k vues",
+    date: "01/09/2024",
+    summary: "Secrets révélés sur NUFFI."
+  },
+  {
+    title: "La Face Cachée de FREEZIE...",
+    views: "85 k vues",
+    date: "01/09/2024",
+    summary: "Découverte des aspects cachés de FREEZIE."
+  },
+  {
+    title: "Ce tiktoker détesté... Pour rien.",
+    views: "40 k vues",
+    date: "01/08/2024",
+    summary: "Défense d’un tiktoker injustement critiqué."
+  },
+  {
+    title: "Passer de MENTEUR à véritable GOAT !",
+    views: "152 k vues",
+    date: "01/07/2024",
+    summary: "Parcours de rédemption d’une personnalité controversée."
+  },
+  {
+    title: "Le Gros Problème de DISCORD... (feat Punisher)",
+    views: "38 k vues",
+    date: "01/07/2024",
+    summary: "Analyse des problèmes majeurs sur Discord, avec la participation de Punisher."
+  },
+  {
+    title: "L'endroit où tu dois M0URIR pour Faire des VUES... (ft. Ashlord)",
+    views: "60 k vues",
+    date: "01/06/2024",
+    summary: "Explications sur un lieu extrême où certains font tout pour gagner des vues."
+  },
+  {
+    title: "J'ai Du Faire ça à Cause de PUNISHER...",
+    views: "20 k vues",
+    date: "21/05/2024",
+    summary: "Vidéo explicative sur des choix forcés à cause de Punisher."
+  },
+  {
+    title: "La Fois où Tout le Monde s'est fait MANIPULÉ...",
+    views: "64 k vues",
+    date: "20/05/2024",
+    summary: "Retour sur un événement de manipulation de masse."
+  },
+  {
+    title: "J'ai Survécu 200 Jours Sur Paladium... (@FuzeIII est mort la wsh...)",
+    views: "2,7 k vues",
+    date: "20/05/2024",
+    summary: "Témoignage de survie dans le jeu Paladium."
+  },
+  {
+    title: "J'ai Survécu 100 Jours Sur Paladium... (fuze en sueur)",
+    views: "4,2 k vues",
+    date: "20/05/2023",
+    summary: "Défis et péripéties pendant 100 jours sur Paladium."
+  },
+  {
+    title: "Avoir une légendaire dans une petite boite ! 0,0000173% de chance brawls stars #7",
+    views: "3,2 k vues",
+    date: "20/05/2021",
+    summary: "Vidéo sur la chance incroyable d’obtenir une légendaire dans Brawl Stars."
+  }
+];
+
+
+    function showPage(pageId) {
+      document.querySelectorAll('section').forEach(sec => {
+        sec.classList.remove('active');
+        sec.setAttribute('aria-hidden', 'true');
+      });
+      const current = document.getElementById(pageId);
+      current.classList.add('active');
+      current.removeAttribute('aria-hidden');
+      current.focus();
+
+      document.querySelectorAll('nav button').forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-current', 'false');
+      });
+      const activeBtn = document.getElementById('btn-' + pageId);
+      activeBtn.classList.add('active');
+      activeBtn.setAttribute('aria-current', 'page');
+    }
+
+    // Ajout dynamique des vidéos dans la section "videos"
+    const videoList = document.getElementById('videoList');
+    videos.forEach((vid) => {
+      const div = document.createElement('div');
+      div.className = 'video-item';
+      div.tabIndex = 0;
+      div.setAttribute('role', 'listitem');
+      div.setAttribute('aria-expanded', 'false');
+      div.innerHTML = `
+        <div class="video-title">${vid.title}</div>
+        <div class="video-info">${vid.duration} • ${vid.views} • Publié le ${vid.date}</div>
+        <div class="video-summary">${vid.summary}</div>
+      `;
+      // Toggle résumé au clic ou clavier (Enter / Espace)
+      div.addEventListener('click', () => toggleSummary(div));
+      div.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleSummary(div);
+        }
+      });
+      videoList.appendChild(div);
+    });
+
+    function toggleSummary(element) {
+      const isOpen = element.classList.toggle('open');
+      element.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+
+    const btnAccept = document.getElementById('accept-btn');
+    const msgAccepted = document.getElementById('accepted-msg');
+
+    function acceptReglement() {
+      btnAccept.disabled = true;
+      btnAccept.textContent = "Règlement accepté";
+      btnAccept.setAttribute('aria-pressed', 'true');
+      msgAccepted.style.display = 'block';
+
+      setTimeout(() => {
+        window.location.href = "https://discord.gg/z7szbGUwmJ";
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

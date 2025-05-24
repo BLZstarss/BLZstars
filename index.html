@@ -117,50 +117,6 @@
       text-shadow: 0 0 6px #d32f2fcc;
     }
 
-     .staff-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    #staff-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 auto;
-    }
-
-    #staff-list li {
-      background: #292929;
-      color: #ffc107;
-      padding: 12px 18px;
-      border-left: 5px solid #d32f2f;
-      border-radius: 8px;
-      font-weight: 600;
-      text-align: center;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    #staff-list li:hover {
-      background: #3a3a3a;
-    }
-
-    #staff-role {
-      margin-top: 25px;
-      text-align: center;
-      font-size: 1.1rem;
-      color: #ffeb3b;
-      text-shadow: 0 0 6px #ffeb3bcc;
-    }
-
-    @media (max-width: 640px) {
-      .staff-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    
     /* Accueil */
     #accueil p {
       font-size: 1.15rem;
@@ -354,36 +310,13 @@
 </head>
 <body>
   
-
+  <h1 class="titre-haut" aria-label="BLZstarss, site officiel, faites confiance à BLZstarss">DEV BY: me._.4mel</h1>
 
   <nav aria-label="Navigation principale">
     <button id="btn-accueil" class="active" aria-current="page" onclick="showPage('accueil')">Accueil</button>
     <button id="btn-videos" aria-current="false" onclick="showPage('videos')">Vidéos</button>
     <button id="btn-discord" aria-current="false" onclick="showPage('discord')">Discord</button>
-    <button id="btn-staff" aria-current="false" onclick="showPage('staff')">Staff</button>
   </nav>
-
-    <section id="staff" aria-hidden="true" tabindex="-1" aria-label="Section Staff">
-    <h2>Équipe du Staff</h2>
-    <ul id="staff-list" class="staff-grid">
-      <li data-role="Chef">👑 @BLZstarss</li>
-      <li data-role="Sous-chef">🥈 @Aviator_man</li>
-      <li data-role="Administrateur">🛠️ @Narakys</li>
-      <li data-role="Administrateur">🛠️ @Lapai</li>
-      <li data-role="Administrateur">🛠️ @Zibul</li>
-      <li data-role="Super Modérateur">⭐ @abder_v2</li>
-      <li data-role="Super Modérateur">⭐ @Vore </li>
-      <li data-role="Super Modérateur">⭐ @Rosalune</li>
-      <li data-role="Super Modérateur">⭐ @jesselance</li>
-      <li data-role="Modérateur">🧹 @Tosco</li>
-      <li data-role="Modérateur">🧹 @Nocturno</li>
-      <li data-role="Modérateur">🧹 @Gabz</li>
-      <li data-role="Modérateur">🧹 @Koyorin</li>
-      <li data-role="Modérateur">🧹 @Lanful</li>
-    </ul>
-    <div id="staff-role">Clique sur un pseudo pour voir son rôle.</div>
-  </section>
-</main>
 
   <main tabindex="-1">
     <section id="accueil" class="active" aria-hidden="false" tabindex="-1" aria-label="Section Accueil">
@@ -418,6 +351,7 @@
     </section>
 
     <section id="discord" aria-hidden="true" tabindex="-1" aria-label="Section Discord">
+      <h2>Discord</h2>
       <p>Merci de lire le règlement du serveur avant d'accepter :</p>
       <div id="reglement" role="region" aria-live="polite" aria-atomic="true" tabindex="0">
 
@@ -509,7 +443,240 @@ Pour accepter le règlement du serveur, veuillez interagir avec le bouton ci-des
     date: "10/05/2025",
     summary: "Discussion sur l’incroyable constance de Cyprien, qui malgré les aléas du web, ne semble jamais perdre sa popularité."
   },
-
+  {
+    title: "Pokimane est Hypocrite ?",
+    views: "46 k vues",
+    date: "01/05/2025",
+    summary: "Enquête et accusations d'hypocrisie autour de Pokimane, avec des exemples précis de ses contradictions publiques."
+  },
+  {
+    title: "La Vérité sur la Mère de Swan et Néo...",
+    views: "64 k vues",
+    date: "21/04/2025",
+    summary: "Révélations sur la mère de Swan et Néo, révélant des détails personnels jusque-là inconnus du public."
+  },
+  {
+    title: "Où est Passé Alan FoodChallenge ?",
+    views: "50 k vues",
+    date: "19/04/2025",
+    summary: "Analyse de la disparition d’Alan FoodChallenge des réseaux, entre choix personnels et pressions externes."
+  },
+  {
+    title: "Pourquoi Hugoposé a Chuté ? (selon moi)",
+    views: "44 k vues",
+    date: "17/04/2025",
+    summary: "Point de vue personnel sur la raison de la chute d’Hugoposé, entre erreurs de communication et perte d'audience."
+  },
+  {
+    title: "(+13) L'horreur Cachée derrière les Shorts YouTube...",
+    views: "50 k vues",
+    date: "15/04/2025",
+    summary: "Explication des dangers et aspects cachés des Shorts YouTube, souvent ignorés par les utilisateurs."
+  },
+  {
+    title: "Le Milliardaire Détesté d'Internet...",
+    views: "21 k vues",
+    date: "14/04/2025",
+    summary: "Portrait d’un milliardaire très controversé, détesté par la communauté internet pour ses actes."
+  },
+  {
+    title: "La Chute Méritée de Lama Fâché...",
+    views: "221 k vues",
+    date: "13/04/2025",
+    summary: "Récit de la chute de Lama Fâché, jugée méritée après une série de mauvais choix."
+  },
+  {
+    title: "L'histoire et les Scandales de Michou...",
+    views: "32 k vues",
+    date: "12/04/2025",
+    summary: "Retour sur les scandales qui ont marqué la carrière de Michou."
+  },
+  {
+    title: "Le plus gros Détraqué d'internet...",
+    views: "61 k vues",
+    date: "12/04/2025",
+    summary: "Portrait d’un individu très controversé qui choque la communauté internet par son comportement."
+  },
+  {
+    title: "Faut qu'on parle...",
+    views: "21 k vues",
+    date: "11/04/2025",
+    summary: "Vidéo personnelle où l’auteur aborde des sujets sensibles et importants à discuter."
+  },
+  {
+    title: "L'entreprise qui Manipule des TikTokeurs...",
+    views: "25 k vues",
+    date: "10/03/2025",
+    summary: "Enquête sur une entreprise qui manipule des créateurs TikTok pour son profit."
+  },
+  {
+    title: "Le Groupe Roblox qui Cache un FOU...",
+    views: "62 k vues",
+    date: "08/03/2025",
+    summary: "Révélations sur un groupe Roblox dirigé par une personne à problème mental."
+  },
+  {
+    title: "(13+) Sophie Rain est une Prostituée...",
+    views: "116 k vues",
+    date: "05/02/2025",
+    summary: "Accusations graves envers Sophie Rain, vidéo pour public averti."
+  },
+  {
+    title: "(13+) Cette Streameuse a Dérapé... (2/2)",
+    views: "56 k vues",
+    date: "03/02/2025",
+    summary: "Analyse des dérapages publics d’une streameuse controversée."
+  },
+  {
+    title: "Nasdas est Dangereux ?!",
+    views: "37 k vues",
+    date: "01/02/2025",
+    summary: "Enquête sur la dangerosité de Nasdas, créateur au comportement problématique."
+  },
+  {
+    title: "(13+) La Yandere M*urtrière Adorée...",
+    views: "37 k vues",
+    date: "01/02/2025",
+    summary: "Portrait d’une figure yandere admirée malgré son passé violent."
+  },
+  {
+    title: "Le plus gros Drama de l'année...",
+    views: "43 k vues",
+    date: "01/01/2025",
+    summary: "Résumé du plus gros scandale de l'année écoulée."
+  },
+  {
+    title: "Le Prochain GTA ne Sauvera pas LaSalle...",
+    views: "43 k vues",
+    date: "01/01/2025",
+    summary: "Discussion critique sur l’avenir de LaSalle avec la sortie du prochain GTA."
+  },
+  {
+    title: "La fin Inévitable d'Overspes...",
+    views: "58 k vues",
+    date: "01/01/2025",
+    summary: "Analyse de la fin annoncée de Overspes."
+  },
+  {
+    title: "(13+) L'application où tu peux Voir des **** Dessinés...",
+    views: "157 k vues",
+    date: "01/12/2024",
+    summary: "Exposition d’une application controversée avec contenu inapproprié."
+  },
+  {
+    title: "La Pire Chute du YouTube Français...",
+    views: "24 k vues",
+    date: "01/12/2024",
+    summary: "Analyse d’une des plus grosses chutes chez les YouTubers français."
+  },
+  {
+    title: "Comment Laupok en est-t'il arrivé là ?",
+    views: "35 k vues",
+    date: "01/12/2024",
+    summary: "Retour sur le parcours difficile de Laupok."
+  },
+  {
+    title: "(13+) La Pire Streameuse ? (Racisme, etc..) (1/2)",
+    views: "110 k vues",
+    date: "01/12/2024",
+    summary: "Décryptage des controverses autour d’une streameuse très critiquée."
+  },
+  {
+    title: "(13+) La Folle Instable de Gacha Life...",
+    views: "78 k vues",
+    date: "01/11/2024",
+    summary: "Portrait d’une personnalité instable dans l’univers Gacha Life."
+  },
+  {
+    title: "(13+) Voici Pourquoi Cette Personne est Très Dangereuse...",
+    views: "208 k vues",
+    date: "01/11/2024",
+    summary: "Explication des raisons qui rendent cette personne dangereuse."
+  },
+  {
+    title: "La Chute Méritée de Noa...",
+    views: "235 k vues",
+    date: "01/11/2024",
+    summary: "Analyse de la chute de Noa, largement méritée."
+  },
+  {
+    title: "La fois où tout le monde s'est fait Manipulé 2...",
+    views: "21 k vues",
+    date: "01/09/2024",
+    summary: "Deuxième partie d’une série sur une manipulation massive du public."
+  },
+  {
+    title: "Pourquoi Hyra est Considéré comme un TARÉ !? (1/2)",
+    views: "111 k vues",
+    date: "01/09/2024",
+    summary: "Premières révélations sur Hyra et son comportement choquant."
+  },
+  {
+    title: "Ce que je Vous ai Caché sur NUFFI...",
+    views: "19 k vues",
+    date: "01/09/2024",
+    summary: "Secrets révélés sur NUFFI."
+  },
+  {
+    title: "La Face Cachée de FREEZIE...",
+    views: "85 k vues",
+    date: "01/09/2024",
+    summary: "Découverte des aspects cachés de FREEZIE."
+  },
+  {
+    title: "Ce tiktoker détesté... Pour rien.",
+    views: "40 k vues",
+    date: "01/08/2024",
+    summary: "Défense d’un tiktoker injustement critiqué."
+  },
+  {
+    title: "Passer de MENTEUR à véritable GOAT !",
+    views: "152 k vues",
+    date: "01/07/2024",
+    summary: "Parcours de rédemption d’une personnalité controversée."
+  },
+  {
+    title: "Le Gros Problème de DISCORD... (feat Punisher)",
+    views: "38 k vues",
+    date: "01/07/2024",
+    summary: "Analyse des problèmes majeurs sur Discord, avec la participation de Punisher."
+  },
+  {
+    title: "L'endroit où tu dois M0URIR pour Faire des VUES... (ft. Ashlord)",
+    views: "60 k vues",
+    date: "01/06/2024",
+    summary: "Explications sur un lieu extrême où certains font tout pour gagner des vues."
+  },
+  {
+    title: "J'ai Du Faire ça à Cause de PUNISHER...",
+    views: "20 k vues",
+    date: "21/05/2024",
+    summary: "Vidéo explicative sur des choix forcés à cause de Punisher."
+  },
+  {
+    title: "La Fois où Tout le Monde s'est fait MANIPULÉ...",
+    views: "64 k vues",
+    date: "20/05/2024",
+    summary: "Retour sur un événement de manipulation de masse."
+  },
+  {
+    title: "J'ai Survécu 200 Jours Sur Paladium... (@FuzeIII est mort la wsh...)",
+    views: "2,7 k vues",
+    date: "20/05/2024",
+    summary: "Témoignage de survie dans le jeu Paladium."
+  },
+  {
+    title: "J'ai Survécu 100 Jours Sur Paladium... (fuze en sueur)",
+    views: "4,2 k vues",
+    date: "20/05/2023",
+    summary: "Défis et péripéties pendant 100 jours sur Paladium."
+  },
+  {
+    title: "Avoir une légendaire dans une petite boite ! 0,0000173% de chance brawls stars #7",
+    views: "3,2 k vues",
+    date: "20/05/2021",
+    summary: "Vidéo sur la chance incroyable d’obtenir une légendaire dans Brawl Stars."
+  }
 ];
 
 
@@ -531,18 +698,6 @@ Pour accepter le règlement du serveur, veuillez interagir avec le bouton ci-des
       activeBtn.classList.add('active');
       activeBtn.setAttribute('aria-current', 'page');
     }
-
-    // Script pour afficher le rôle au clic sur un membre du staff
-  const staffItems = document.querySelectorAll("#staff-list li");
-  const roleDisplay = document.getElementById("staff-role");
-
-  staffItems.forEach(item => {
-    item.addEventListener("click", () => {
-      const role = item.getAttribute("data-role");
-      const name = item.textContent;
-      roleDisplay.textContent = `${name} : ${role}`;
-    });
-  });
 
     // Ajout dynamique des vidéos dans la section "videos"
     const videoList = document.getElementById('videoList');

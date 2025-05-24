@@ -3,427 +3,289 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BLZstarss</title>
+  <title>BLZstrss</title>
+  <head><link rel="icon" href="channels4_profile.jpg" type="image/png" /></head>
   <style>
-    /* Reset */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #121212;
-      color: #eee;
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    /* Style du titre */
-    .titre-haut {
-      font-size: 3rem;
-      font-weight: bold;
-      text-shadow:
-        0 0 5px #ff0000,
-        0 0 10px #ff0000,
-        0 0 20px #ff0000,
-        0 0 40px #ff0000;
-      user-select: none;
-      margin: 0 0 30px 0;
-      text-align: center;
-      z-index: 1;
+      margin: 0; font-family: 'Segoe UI', sans-serif;
+      background: #121212; color: #eee;
+      display: flex; flex-direction: column; align-items: center;
     }
     header {
-      background: #1b1b1b;
-      color: #d32f2f;
-      padding: 25px 15px;
-      text-align: center;
-      font-weight: 700;
-      font-size: 2rem;
-      letter-spacing: 3px;
-      text-shadow: 0 0 8px #d32f2faa;
-      user-select: none;
+      background: #1b1b1b; color: #d32f2f;
+      padding: 20px 0; font-size: 2rem; text-align: center;
       border-bottom: 3px solid #d32f2f;
+      width: 100%;
     }
     nav {
-      display: flex;
-      justify-content: center;
-      background-color: #1b1b1b;
-      box-shadow: inset 0 -3px 6px #d32f2f55;
+      display: flex; justify-content: center;
+      background: #1b1b1b; width: 100%; max-width: 600px;
       border-bottom: 2px solid #d32f2f;
     }
     nav button {
-      flex: 1;
-      max-width: 200px;
-      background: transparent;
-      border: none;
-      padding: 18px 0;
-      color: #bbb;
-      font-weight: 600;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      flex: 1; max-width: 200px; background: transparent;
+      border: none; padding: 18px 0;
+      color: #bbb; font-weight: 600;
+      font-size: 1.1rem; cursor: pointer;
       border-bottom: 3px solid transparent;
-      letter-spacing: 0.04em;
-      user-select: none;
-    }
-    nav button:hover:not(.active) {
-      background-color: #d32f2f22;
-      color: #ffb74d;
     }
     nav button.active {
-      background-color: #d32f2f11;
-      color: #ffc107;
-      border-bottom: 3px solid #ffc107;
-      cursor: default;
-      font-weight: 700;
+      color: #ffc107; border-bottom: 3px solid #ffc107;
       text-shadow: 0 0 6px #ffc107bb;
     }
-
     main {
-      flex-grow: 1;
-      max-width: 960px;
-      width: 95%;
-      margin: 30px auto 40px;
-      background: #1e1e1e;
-      border-radius: 12px;
-      padding: 25px 30px;
+      max-width: 600px; width: 95%;
+      background: #1e1e1e; border-radius: 12px;
+      padding: 25px 30px; margin: 30px auto;
       box-shadow: 0 10px 25px rgb(211 47 47 / 0.4);
-      min-height: 400px;
-      position: relative;
-      overflow: hidden;
     }
-
-    section {
-      display: none;
-      animation: fadeIn 0.5s ease forwards;
-    }
-    section.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(15px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
     h2 {
-      text-align: center;
-      color: #d32f2f;
-      font-weight: 700;
-      font-size: 2rem;
-      margin-bottom: 25px;
-      letter-spacing: 0.06em;
+      text-align: center; color: #d32f2f;
+      font-size: 2rem; margin-bottom: 25px;
       text-shadow: 0 0 6px #d32f2fcc;
     }
 
-    /* Accueil */
-    #accueil p {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      text-align: justify;
-      color: #ddd;
-      max-width: 900px;
-      margin: 0 auto;
-      letter-spacing: 0.02em;
+    section { display: none; }
+    section.active { display: block; }
+
+    /* STAFF */
+    .staff-container {
+      display: flex; flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+    }
+    .staff-member {
+      flex: 0 0 48%;
+      background: #292929;
+      padding: 14px 18px;
+      border-radius: 10px;
+      color: #ffc107;
+      font-weight: 700;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 2px 10px rgb(211 47 47 / 0.15);
+    }
+    .staff-role {
+      margin-top: 8px;
+      color: #ffb74d;
+      font-weight: 600;
+      display: none;
+    }
+    .staff-member.active .staff-role {
+      display: block;
     }
 
-    /* Vidéos */
-    #videos .video-item {
+    /* VIDEOS */
+    .video-item {
       background: #292929;
       border-radius: 10px;
-      margin-bottom: 20px;
-      padding: 18px 22px;
-      box-shadow: 0 2px 10px rgb(211 47 47 / 0.15);
-      cursor: pointer;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      border-left: 5px solid transparent;
-      user-select: none;
-    }
-    #videos .video-item:hover {
-      box-shadow: 0 6px 20px rgb(211 47 47 / 0.5);
-      transform: translateY(-3px);
-      border-left-color: #ffc107;
-      background: #3b2c1d;
+      padding: 15px 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 10px rgb(211 47 47 / 0.2);
     }
     .video-title {
-      font-weight: 700;
-      font-size: 1.2rem;
       color: #ffc107;
-      margin-bottom: 8px;
-      letter-spacing: 0.02em;
-      text-shadow: 0 0 5px #ffc107cc;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 0;
+      cursor: pointer;
     }
-    .video-info {
-      font-size: 0.95rem;
-      color: #aaa;
-      font-style: italic;
+    .video-meta {
+      font-size: 0.9rem;
+      color: #bbb;
       margin-bottom: 10px;
-      user-select: text;
     }
     .video-summary {
       font-size: 1rem;
-      color: #eee;
-      line-height: 1.55;
-      border-left: 4px solid #d32f2f;
-      padding-left: 14px;
+      line-height: 1.4;
       display: none;
-      margin-top: 8px;
-      user-select: text;
-      background: #3d2121;
-      border-radius: 6px;
-      text-shadow: 0 0 3px #d32f2f88;
+      color: #ffb74d;
     }
-    .video-item.open .video-summary {
+    .video-item.active .video-summary {
       display: block;
-      animation: slideDownFade 0.3s ease forwards;
     }
 
-    @keyframes slideDownFade {
-      from {opacity: 0; max-height: 0;}
-      to {opacity: 1; max-height: 500px;}
-    }
-
-    /* Discord */
-    #discord p {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #ffc107;
+    /* DISCORD */
+    #discord-section p {
+      font-size: 1.1rem;
+      color: #ffb74d;
       text-align: center;
-      margin-bottom: 18px;
-      text-shadow: 0 0 4px #ffc107aa;
+      margin-top: 20px;
     }
-    #discord a {
-      display: inline-block;
-      text-align: center;
-      margin-bottom: 30px;
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: #d32f2f;
-      text-decoration: none;
-      border: 2px solid #d32f2f;
-      padding: 12px 22px;
-      border-radius: 30px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      user-select: none;
-      box-shadow: 0 0 12px #d32f2faa;
-    }
-    #discord a:hover {
+    #accept-button {
+      display: block;
+      margin: 30px auto;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
       background-color: #d32f2f;
       color: white;
-      box-shadow: 0 0 18px #ff5757;
-    }
-
-    #reglement {
-      max-width: 880px;
-      height: 340px;
-      margin: 0 auto 25px;
-      padding: 20px 25px;
-      border-radius: 15px;
-      background: #222;
-      border: 1.8px solid #d32f2f;
-      color: #eee;
-      font-size: 0.98rem;
-      overflow-y: auto;
-      white-space: pre-wrap;
-      box-shadow: inset 0 0 8px #d32f2f99;
-      user-select: text;
-      line-height: 1.5;
-      letter-spacing: 0.01em;
-      text-shadow: 0 0 1px #000;
-    }
-    #reglement::-webkit-scrollbar {
-      width: 10px;
-    }
-    #reglement::-webkit-scrollbar-thumb {
-      background-color: #d32f2f;
       border-radius: 8px;
-      box-shadow: inset 0 0 6px #ff7878;
-    }
-    #reglement::-webkit-scrollbar-track {
-      background: #2c2c2c;
-      border-radius: 8px;
-    }
-
-    #accept-btn {
-      display: block;
-      margin: 0 auto;
-      background-color: #ffc107;
-      color: #3e2723;
-      font-weight: 800;
-      font-size: 1.15rem;
-      padding: 13px 32px;
-      border: none;
-      border-radius: 40px;
       cursor: pointer;
-      user-select: none;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 10px #ffc107aa;
-      letter-spacing: 0.05em;
-    }
-    #accept-btn:hover:not(:disabled) {
-      background-color: #ffb300;
-      box-shadow: 0 0 20px #ffdb4d;
-    }
-    #accept-btn:disabled {
-      background-color: #555;
-      color: #aaa;
-      cursor: default;
-      box-shadow: none;
-    }
-
-    #accepted-msg {
-      text-align: center;
-      margin-top: 18px;
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: #4caf50;
-      text-shadow: 0 0 4px #4caf5077;
-    }
-
-    /* Accessibility */
-    nav button:focus-visible,
-    #accept-btn:focus-visible,
-    .video-item:focus-visible {
-      outline: 3px solid #ffc107;
-      outline-offset: 3px;
-    }
-
-    /* Responsive */
-    @media (max-width: 560px) {
-      .titre-haut {
-        font-size: 2.2rem;
-      }
-      nav button {
-        font-size: 1rem;
-        padding: 15px 0;
-      }
-      main {
-        padding: 20px 15px;
-      }
     }
   </style>
 </head>
-<head>
-  <link rel="icon" href="channels4_profile.jpg" type="image/png" />
-
-</head>
 <body>
-  
-  <h1 class="titre-haut" aria-label="BLZstarss, site officiel, faites confiance à BLZstarss">DEV BY: me._.4mel</h1>
 
-  <nav aria-label="Navigation principale">
-    <button id="btn-accueil" class="active" aria-current="page" onclick="showPage('accueil')">Accueil</button>
-    <button id="btn-videos" aria-current="false" onclick="showPage('videos')">Vidéos</button>
-    <button id="btn-discord" aria-current="false" onclick="showPage('discord')">Discord</button>
+  <nav>
+    <button class="active" onclick="setActive('home')">Accueil</button>
+    <button onclick="setActive('videos')">Vidéos</button>
+    <button onclick="setActive('discord')">Discord</button>
   </nav>
 
-  <main tabindex="-1">
-    <section id="accueil" class="active" aria-hidden="false" tabindex="-1" aria-label="Section Accueil">
-      <p>
-        Bienvenue sur BLZstarss, votre destination incontournable pour la découverte de contenus vidéo uniques et captivants. Que vous soyez un passionné de vidéos d’analyse, un curieux à la recherche de nouveautés, ou simplement quelqu’un qui aime s’informer de manière approfondie, vous êtes au bon endroit.
-
-        Notre site a été conçu pour offrir une expérience riche et immersive autour de thématiques variées, allant des enquêtes détaillées aux critiques pertinentes en passant par des documentaires passionnants. Chaque vidéo présentée est sélectionnée avec soin afin de vous proposer un contenu de qualité, rigoureux et toujours intéressant.
-        
-        En explorant BLZstarss, vous découvrirez une vaste bibliothèque de vidéos qui couvrent un large éventail de sujets actuels, culturels, et parfois même controversés. Notre objectif est de vous permettre de comprendre les enjeux derrière les événements, d’éclairer certains mystères et de vous faire découvrir des perspectives que vous n’auriez peut-être pas envisagées.
-        
-        Mais BLZstarss, ce n’est pas seulement un site de vidéos. C’est aussi une communauté dynamique et engagée. En effet, nous mettons à votre disposition un serveur Discord où vous pouvez échanger directement avec d’autres passionnés, poser vos questions, partager vos opinions et participer à des discussions enrichissantes. Ce lieu d’échange est parfait pour rencontrer des personnes qui partagent vos centres d’intérêt et pour rester informé des dernières nouveautés et événements.
-        
-        Notre interface simple et intuitive vous permet de naviguer facilement entre les différentes sections. Que vous souhaitiez parcourir les vidéos récentes, découvrir des analyses approfondies, ou rejoindre notre communauté sur Discord, tout est pensé pour que votre visite soit agréable et productive.
-        
-        Nous croyons fermement que l’information de qualité est essentielle pour mieux comprendre le monde qui nous entoure. C’est pourquoi chaque contenu que nous proposons est le fruit d’un travail rigoureux de recherche et de réflexion. Nous nous engageons à vous fournir des vidéos qui non seulement divertissent, mais aussi vous enrichissent intellectuellement.
-        
-        Que vous soyez un visiteur occasionnel ou un membre actif, BLZstarss vous offre une plateforme où la curiosité est encouragée et où la découverte est au cœur de chaque interaction. Nous vous invitons à explorer nos différentes rubriques, à visionner nos contenus et à prendre part à cette aventure collective.
-        
-        Merci de faire partie de BLZstarss. Ensemble, faisons grandir cette communauté, partageons nos idées et continuons à apprendre chaque jour un peu plus grâce à des vidéos de qualité.
-        
-        N’hésitez pas à nous faire part de vos retours, suggestions ou demandes. Votre avis est précieux pour nous aider à améliorer continuellement le site et vous offrir toujours plus de contenu passionnant.
-        
-        Bonne visite et à très vite sur BLZstarss, le site où la découverte, l’analyse et la communauté se rencontrent pour vous offrir le meilleur du web vidéo.
-      </p>
-    </section>
-
-    <section id="videos" aria-hidden="true" tabindex="-1" aria-label="Section Vidéos">
-      
-      <div id="videoList" role="list" aria-label="Liste des vidéos">
-        <!-- Les vidéos seront insérées ici dynamiquement -->
+  <main>
+    <section id="home" class="active">
+      <h2>Notre Staff</h2>
+      <div class="staff-container">
+        <div class="staff-member" data-role="Chef">👑 BLZstrss
+          <div class="staff-role">Rôle : Chef</div>
+        </div>
+        <div class="staff-member" data-role="Sous chef">🥈 Aviator_man
+          <div class="staff-role">Rôle : Sous chef</div>
+        </div>
+        <div class="staff-member" data-role="Administrateur">🛠️ Narakys
+          <div class="staff-role">Rôle : Administrateur</div>
+        </div>
+        <div class="staff-member" data-role="Administrateur">🛠️ Lapai
+          <div class="staff-role">Rôle : Administrateur</div>
+        </div>
+        <div class="staff-member" data-role="Administrateur">🛠️ Zibul
+          <div class="staff-role">Rôle : Administrateur</div>
+        </div>
+        <div class="staff-member" data-role="Super Modérateur">⭐ Abder
+          <div class="staff-role">Rôle : Super Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Super Modérateur">⭐ Vore
+          <div class="staff-role">Rôle : Super Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Super Modérateur">⭐ Rosalune
+          <div class="staff-role">Rôle : Super Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Super Modérateur">⭐ Jesse
+          <div class="staff-role">Rôle : Super Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">🔨 Tosco
+          <div class="staff-role">Rôle : Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">🔨 Nocturno
+          <div class="staff-role">Rôle : Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">🔨 Gabz
+          <div class="staff-role">Rôle : Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">🔨 Koyorin
+          <div class="staff-role">Rôle : Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">🔨 Lanful
+          <div class="staff-role">Rôle : Modérateur</div>
+        </div>
       </div>
     </section>
 
-    <section id="discord" aria-hidden="true" tabindex="-1" aria-label="Section Discord">
+    <section id="videos">
+      <h2>Nos Vidéos</h2>
+      <div id="videos-container"></div>
+    </section>
+
+    <section id="discord">
       <h2>Discord</h2>
-      <p>Merci de lire le règlement du serveur avant d'accepter :</p>
-      <div id="reglement" role="region" aria-live="polite" aria-atomic="true" tabindex="0">
+      
+  <h1>Règlement BLZstarss</h1>
 
-**Acceptez le règlement de BLZstarss pour accéder à l'intégralité du serveur**
+  <p><strong>Acceptez le règlement de BLZstarss pour accéder à l'intégralité du serveur</strong></p>
 
-**SYSTÈME D'AVERTISSEMENTS**  
-Quand vous recevez une sanction ou que vous avez fait quelque chose de pas très grave, vous recevez un warn. Tous les 5 warns, vous prendrez 1 jour d’exclusion. Si votre nombre de warns devient trop élevé, le staff peut voir pour vous bannir.
+  <p><strong>Système d'avertissements</strong><br />
+  Quand vous recevez une sanction ou que vous avez fait quelque chose de pas très grave, vous recevez un <strong>warn</strong>. Tous les <strong>5 warns</strong>, vous prenez <strong>1 jour d’exclusion</strong>. Si votre nombre de warns devient trop élevé, le staff peut envisager de vous <strong>bannir</strong>.</p>
 
-**ATTENTION**  
-Sachez d’avance qu’un staff peut vous mettre une sanction pour quelque chose qui n’est pas dans le règlement, mais qui paraît évident (parler de cannibalisme, de camps de concentration, etc.).
+  <p><strong>Attention</strong><br />
+  Un staff peut vous sanctionner pour quelque chose qui n’est <strong>pas dans le règlement</strong>, mais qui paraît évident (ex : parler de cannibalisme, de camps de concentration, etc.).</p>
 
-**ATTENTION 2**  
-Si vous n’avez pas accepté ce règlement, la sanction est doublée.
+  <p><strong>Attention 2</strong><br />
+  Si vous <strong>n’avez pas accepté ce règlement</strong>, la sanction est <strong>doublée</strong>.</p>
 
-**INSULTES**  
-Les insultes sont plus ou moins interdites sur le serveur en fonction du nombre et de la gravité de l’insulte. Par exemple, « pu!ain de merde » ne sera pas sanctionné, mais « va te faire v!oler sale encu!er » sera sanctionné. Les sanctions peuvent aller de 1 heure à 1 semaine (+1 avertissement).
+  <p><strong>Insultes</strong><br />
+  Les insultes sont plus ou moins interdites selon leur gravité :<br />
+  - « pu!ain de merde » ne sera pas sanctionné<br />
+  - « va te faire v!oler sale encu!er » sera sanctionné<br />
+  Les sanctions vont de <strong>1 heure à 1 semaine</strong> (+1 avertissement).</p>
 
-**PUBLICITÉ**  
-La publicité en dehors du salon de publicité est punissable d’un avertissement (et d’une heure d’exclusion si c’est en message privé) (+1 avertissement).
+  <p><strong>Publicité</strong><br />
+  La publicité hors du salon dédié est punie d’un avertissement, et d’<strong>1 heure d’exclusion</strong> si c’est en message privé (+1 avertissement).</p>
 
-**CONTENU SEXUEL**  
-Tout contenu ayant référence au sexe sera puni d’une heure d’exclusion pour les cas les moins graves (parler de parties génitales) et d’un ban définitif pour les cas les plus graves (vidéos).
+  <p><strong>Contenu Sexuel</strong><br />
+  Tout contenu à référence sexuelle est puni :<br />
+  - <strong>1 heure d’exclusion</strong> pour les cas moins graves (parler de parties génitales)<br />
+  - <strong>Ban définitif</strong> pour les plus graves (vidéos).</p>
 
-**PROFILS**  
-Les profils doivent être respectueux. Les insultes sont autorisées tant qu’elles ne sont pas trop graves, mais le contenu sexuel et gore ne doit pas apparaître dans ce genre de profils, ni les références aux époques sombres de l’histoire sauf s’il s’agit de simples blagues. Cela peut entraîner un ban si vous refusez de changer votre profil.
+  <p><strong>Profils</strong><br />
+  Les profils doivent être respectueux :<br />
+  - Les insultes légères sont tolérées<br />
+  - Le sexe, le gore, et les références aux époques sombres de l’histoire (sauf blagues simples) sont interdits<br />
+  Refuser de changer un profil interdit peut entraîner un <strong>ban</strong>.</p>
 
-**CONTENU VIOLENT**  
-Les vidéos gores ou incluant du sang sont interdites. Si vous en envoyez une, vous serez banni. Si c’est un dessin, le sang est autorisé, mais des dessins trop violents peuvent entraîner jusqu’à 1 jour d’exclusion (+1 avertissement).
+  <p><strong>Contenu Violent</strong><br />
+  - Les vidéos gores ou avec du sang sont <strong>interdites</strong> et entraînent un <strong>ban</strong>.<br />
+  - Pour les dessins, le sang est autorisé, mais les dessins trop violents peuvent causer <strong>1 jour d’exclusion</strong> (+1 avertissement).</p>
 
-**SPAM**  
-Le spam est interdit. Vous pouvez prendre un avertissement si vous spammez.
+  <p><strong>Spam</strong><br />
+  Le spam est interdit et peut valoir un avertissement.</p>
 
-**POLITIQUE & religions**  
-Parler de politique et de religions est autorisé, mais veuillez ne faire aucune incitation à quoi que ce soit, sinon vous prendrez instantanément 1 jour d’exclusion (+1 avertissement).
+  <p><strong>Politique & Religions</strong><br />
+  Parler de politique et religion est autorisé, mais <strong>aucune incitation</strong> n’est permise sous peine de <strong>1 jour d’exclusion</strong> (+1 avertissement).</p>
 
-**TROLL**  
-Le troll méchant et répétitif est interdit et peut aller jusqu’à 1 jour d’exclusion (+1 avertissement).
+  <p><strong>Troll</strong><br />
+  Le troll méchant et répétitif est interdit et peut entraîner <strong>1 jour d’exclusion</strong> (+1 avertissement).</p>
 
-**DISCRIMINATION**  
-La discrimination est interdite sur le serveur. Vous pouvez recevoir une exclusion d’une semaine jusqu’à un ban définitif.
+  <p><strong>Moqueries & Harcèlement</strong><br />
+  Les moqueries peuvent entraîner <strong>1 jour d’exclusion</strong>, et un ban total si c’est répété (+1 avertissement).</p>
 
-**HUMOUR NOIR**  
-L’humour noir est autorisé, mais à ne pas en abuser sous peine de recevoir un avertissement.
+  <p><strong>Discrimination</strong><br />
+  La discrimination est interdite et sanctionnée par <strong>1 semaine d’exclusion à un ban définitif</strong>.</p>
 
-**USURPATION D'IDENTITÉ**  
-L’usurpation d’identité est interdite et peut entraîner 1 jour d’exclusion, puis 1 semaine, et un ban si la personne continue.
+  <p><strong>Humour noir</strong><br />
+  L’humour noir est autorisé mais à ne pas abuser, sinon vous risquez <strong>1 avertissement</strong>.</p>
 
-**LES MENTION**  
-Faire un @ sur un modo ou BLZ est autorisé, mais si vous en abusez ou que c’est inutile, vous pouvez prendre 1 heure d’exclusion et 1 avertissement.
+  <p><strong>Parler de sombres époques</strong><br />
+  Interdit, avec jusqu’à <strong>1 semaine d’exclusion</strong> et ban définitif si vous souhaitez leur retour.</p>
 
-**Divulgation**  
-La divulgation d’informations personnelles non consentie est interdite et entraîne un ban.
+  <p><strong>Usurpation d'identité</strong><br />
+  Interdite, entraîne <strong>1 jour d’exclusion</strong>, puis <strong>1 semaine</strong>, puis ban si récidive.</p>
 
-**SPOIL**  
-Le spoil est interdit. Vous pouvez prendre un avertissement pour cela.
+  <p><strong>Les mentions</strong><br />
+  Mentionner un modo ou BLZ est autorisé, mais en cas d’abus, sanction de <strong>1 heure d’exclusion</strong> et <strong>1 avertissement</strong>.</p>
 
-**Application des Conditions d'Utilisation de Discord**  
-Les Conditions d'Utilisation (ToS) de Discord s'appliquent également sur ce serveur. Bien que nous encouragions une certaine flexibilité dans les interactions, tous les membres doivent respecter ces règles pour garantir un environnement sûr et agréable pour l'ensemble de la communauté. Une violation des ToS peut entraîner des sanctions proportionnelles à la gravité de l'infraction.
+  <p><strong>Divulgation</strong><br />
+  La divulgation d’informations personnelles non consenties entraîne un <strong>ban</strong>.</p>
 
----
+  <p><strong>Spoil</strong><br />
+  Le spoil est interdit et puni d’un avertissement.</p>
 
-Pour accepter le règlement du serveur, veuillez interagir avec le bouton ci-dessous !
+  <p><strong>Application des Conditions d'Utilisation de Discord</strong><br />
+  Les ToS de Discord s’appliquent aussi ici. Toute violation entraîne des sanctions adaptées.</p>
 
-      </div>
-      <button id="accept-btn" onclick="acceptReglement()" aria-pressed="false">J'accepte le règlement</button>
-      <div id="accepted-msg" style="display:none;" aria-live="assertive" aria-atomic="true">Merci d'avoir accepté le règlement ! Vous allez être redirigé…</div>
+
+      <button id="accept-button">Accepter le règlement</button>
     </section>
   </main>
 
   <script>
-    // Données vidéos d'exemple
-  
+    function setActive(id) {
+      document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+      document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+      event.target.classList.add("active");
+    }
+
+    // Staff toggle
+    document.querySelectorAll('.staff-member').forEach(member => {
+      member.addEventListener('click', () => {
+        member.classList.toggle('active');
+      });
+    });
+
+    // Vidéos
+    
     const videos = [
   {
     title: "La Chute Inévitable de Dream...",
@@ -678,69 +540,30 @@ Pour accepter le règlement du serveur, veuillez interagir avec le bouton ci-des
     summary: "Vidéo sur la chance incroyable d’obtenir une légendaire dans Brawl Stars."
   }
 ];
-
-
-    function showPage(pageId) {
-      document.querySelectorAll('section').forEach(sec => {
-        sec.classList.remove('active');
-        sec.setAttribute('aria-hidden', 'true');
-      });
-      const current = document.getElementById(pageId);
-      current.classList.add('active');
-      current.removeAttribute('aria-hidden');
-      current.focus();
-
-      document.querySelectorAll('nav button').forEach(btn => {
-        btn.classList.remove('active');
-        btn.setAttribute('aria-current', 'false');
-      });
-      const activeBtn = document.getElementById('btn-' + pageId);
-      activeBtn.classList.add('active');
-      activeBtn.setAttribute('aria-current', 'page');
-    }
-
-    // Ajout dynamique des vidéos dans la section "videos"
-    const videoList = document.getElementById('videoList');
-    videos.forEach((vid) => {
-      const div = document.createElement('div');
-      div.className = 'video-item';
-      div.tabIndex = 0;
-      div.setAttribute('role', 'listitem');
-      div.setAttribute('aria-expanded', 'false');
-      div.innerHTML = `
-        <div class="video-title">${vid.title}</div>
-        <div class="video-info">${vid.duration} • ${vid.views} • Publié le ${vid.date}</div>
-        <div class="video-summary">${vid.summary}</div>
+    const container = document.getElementById("videos-container");
+    videos.forEach(v => {
+      const item = document.createElement("div");
+      item.className = "video-item";
+      item.innerHTML = `
+        <h3 class="video-title">${v.title}</h3>
+        <div class="video-meta">${v.views} • ${v.date}</div>
+        <div class="video-summary">${v.summary}</div>
       `;
-      // Toggle résumé au clic ou clavier (Enter / Espace)
-      div.addEventListener('click', () => toggleSummary(div));
-      div.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleSummary(div);
-        }
+      item.querySelector('.video-title').addEventListener('click', () => {
+        item.classList.toggle('active');
       });
-      videoList.appendChild(div);
+      container.appendChild(item);
     });
 
-    function toggleSummary(element) {
-      const isOpen = element.classList.toggle('open');
-      element.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    }
-
-    const btnAccept = document.getElementById('accept-btn');
-    const msgAccepted = document.getElementById('accepted-msg');
-
-    function acceptReglement() {
-      btnAccept.disabled = true;
-      btnAccept.textContent = "Règlement accepté";
-      btnAccept.setAttribute('aria-pressed', 'true');
-      msgAccepted.style.display = 'block';
-
+    // Discord redirection
+    document.getElementById("accept-button").addEventListener("click", () => {
+      const btn = document.getElementById("accept-button");
+      btn.disabled = true;
+      btn.textContent = "Redirection dans 4 secondes...";
       setTimeout(() => {
-        window.location.href = "https://discord.gg/z7szbGUwmJ";
-      }, 1000);
-    }
+        window.location.href = "https://discord.gg/tonlien";
+      }, 4000);
+    });
   </script>
 </body>
 </html>

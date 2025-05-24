@@ -41,20 +41,12 @@
       box-shadow: 0 10px 25px rgb(211 47 47 / 0.4);
     }
 
-    h1 {
-      font-size: 1.5rem;
+    h1, h2 {
       text-align: center;
-      color: #ffc107;
-      margin-bottom: 20px;
-      line-height: 1.6;
       text-shadow: 0 0 5px #d32f2f99;
     }
-
-    h2 {
-      text-align: center; color: #d32f2f;
-      font-size: 2rem; margin-bottom: 25px;
-      text-shadow: 0 0 6px #d32f2fcc;
-    }
+    h1 { font-size: 1.5rem; color: #ffc107; margin-bottom: 20px; }
+    h2 { font-size: 2rem; color: #d32f2f; margin-bottom: 25px; }
 
     section { display: none; }
     section.active { display: block; }
@@ -85,7 +77,6 @@
       display: block;
     }
 
-    /* Couleurs selon les rôles */
     .staff-member[data-role="Chef"] { color: #f70000; }
     .staff-member[data-role="Administrateur"] { color: #66b3ff; }
     .staff-member[data-role="Super Modérateur"] { color: #3583cc; }
@@ -95,19 +86,60 @@
     .staff-member[data-role="Administrateur"] .staff-role { color: #66b3ff; }
     .staff-member[data-role="Super Modérateur"] .staff-role { color: #3583cc; }
     .staff-member[data-role="Modérateur"] .staff-role { color: #2321a8; }
+
+    .video-item {
+      margin-bottom: 20px;
+      padding: 10px;
+      background: #2b2b2b;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .video-title {
+      color: #ffc107;
+      font-size: 1.2rem;
+      margin: 0;
+    }
+    .video-summary {
+      margin-top: 10px;
+      display: none;
+      color: #ddd;
+    }
+    .video-item.active .video-summary {
+      display: block;
+    }
+    .video-meta {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    #accept-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #d32f2f;
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #accept-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
   </style>
 </head>
 <body>
 
   <nav>
-    <button class="active" onclick="setActive('home')">Accueil</button>
-    <button onclick="setActive('videos')">Vidéos</button>
-    <button onclick="setActive('discord')">Discord</button>
+    <button class="active" onclick="setActive('home', event)">Accueil</button>
+    <button onclick="setActive('videos', event)">Vidéos</button>
+    <button onclick="setActive('discord', event)">Discord</button>
   </nav>
 
   <main>
     <section id="home" class="active">
-      <h1>Bienvenue sur ce site web dédié aux vidéos de BLZ !<br>
+      <h1>Bienvenue sur ce site web dédié aux vidéos!<br>
         Vous pouvez y trouver un résumé de chaque vidéo.<br>
         Mais avant cela, découvrez les membres du staff :
       </h1>
@@ -154,10 +186,10 @@
         </div>
         <div class="staff-member" data-role="Modérateur">🔨 Lanful
           <div class="staff-role">Rôle : Modérateur</div>
-        </div>
+      </div>
+    
       </div>
     </section>
-
 
     <section id="videos">
       <h2>Nos Vidéos</h2>
@@ -166,8 +198,7 @@
 
     <section id="discord">
       <h2>Discord</h2>
-      
-  <h1>Règlement BLZstarss</h1>
+      <h1>Règlement BLZstarss</h1>
 
   <p><strong>Acceptez le règlement de BLZstarss pour accéder à l'intégralité du serveur</strong></p>
 
@@ -239,30 +270,28 @@
 
   <p><strong>Application des Conditions d'Utilisation de Discord</strong><br />
   Les ToS de Discord s’appliquent aussi ici. Toute violation entraîne des sanctions adaptées.</p>
-
-
       <button id="accept-button">Accepter le règlement</button>
     </section>
   </main>
 
   <script>
-    function setActive(id) {
-      document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-      document.getElementById(id).classList.add("active");
-      document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-      event.target.classList.add("active");
-    }
+  // Gère l'onglet actif
+  function setActive(id, event) {
+    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+    event.target.classList.add("active");
+  }
 
-    // Staff toggle
-    document.querySelectorAll('.staff-member').forEach(member => {
-      member.addEventListener('click', () => {
-        member.classList.toggle('active');
-      });
+  // Affiche/Masque le rôle du staff au clic
+  document.querySelectorAll('.staff-member').forEach(member => {
+    member.addEventListener('click', () => {
+      member.classList.toggle('active');
     });
+  });
 
-    // Vidéos
-    
-    const videos = [
+  // Génère la liste des vidéos
+  const videos = [
   {
     title: "La Chute Inévitable de Dream...",
     views: "17 k vues",
@@ -516,30 +545,33 @@
     summary: "Vidéo sur la chance incroyable d’obtenir une légendaire dans Brawl Stars."
   }
 ];
-    const container = document.getElementById("videos-container");
-    videos.forEach(v => {
-      const item = document.createElement("div");
-      item.className = "video-item";
-      item.innerHTML = `
-        <h3 class="video-title">${v.title}</h3>
-        <div class="video-meta">${v.views} • ${v.date}</div>
-        <div class="video-summary">${v.summary}</div>
-      `;
-      item.querySelector('.video-title').addEventListener('click', () => {
-        item.classList.toggle('active');
-      });
-      container.appendChild(item);
-    });
 
-    // Discord redirection
-    document.getElementById("accept-button").addEventListener("click", () => {
-      const btn = document.getElementById("accept-button");
-      btn.disabled = true;
-      btn.textContent = "Redirection dans 4 secondes...";
-      setTimeout(() => {
-        window.location.href = "https://discord.gg/UarWXUgXJE";
-      }, 4000);
+
+  const container = document.getElementById("videos-container");
+  videos.forEach(v => {
+    const item = document.createElement("div");
+    item.className = "video-item";
+    item.innerHTML = `
+      <h3 class="video-title">${v.title}</h3>
+      <div class="video-meta">${v.views} • ${v.date}</div>
+      <div class="video-summary">${v.summary}</div>
+    `;
+    item.querySelector('.video-title').addEventListener('click', () => {
+      item.classList.toggle('active');
     });
-  </script>
+    container.appendChild(item);
+  });
+
+  // Redirection Discord avec délai
+  document.getElementById("accept-button").addEventListener("click", () => {
+    const btn = document.getElementById("accept-button");
+    btn.disabled = true;
+    btn.textContent = "Redirection dans 4 secondes...";
+    setTimeout(() => {
+      window.location.href = "https://discord.gg/UarWXUgXJE";
+    }, 4000);
+  });
+</script>
+
 </body>
 </html>

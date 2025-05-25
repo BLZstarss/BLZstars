@@ -7,37 +7,63 @@
   <link rel="icon" href="channels4_profile.jpg" type="image/png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; }
+
     body {
-      margin: 0; font-family: 'Segoe UI', sans-serif;
-      background: #121212; color: #eee;
-      display: flex; flex-direction: column; align-items: center;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+
     header {
-      background: #1b1b1b; color: #d32f2f;
-      padding: 20px 0; font-size: 2rem; text-align: center;
+      background: #1b1b1b;
+      color: #d32f2f;
+      padding: 20px 0;
+      font-size: 2rem;
+      text-align: center;
       border-bottom: 3px solid #d32f2f;
       width: 100%;
     }
+
     nav {
-      display: flex; justify-content: center;
-      background: #1b1b1b; width: 100%; max-width: 600px;
+      display: flex;
+      justify-content: center;
+      background: #1b1b1b;
+      width: 100%;
+      max-width: 600px;
       border-bottom: 2px solid #d32f2f;
     }
+
     nav button {
-      flex: 1; max-width: 200px; background: transparent;
-      border: none; padding: 18px 0;
-      color: #bbb; font-weight: 600;
-      font-size: 1.1rem; cursor: pointer;
+      flex: 1;
+      max-width: 200px;
+      background: transparent;
+      border: none;
+      padding: 18px 0;
+      color: #bbb;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
       border-bottom: 3px solid transparent;
+      transition: color 0.3s, border-bottom-color 0.3s;
     }
+
     nav button.active {
-      color: #ffc107; border-bottom: 3px solid #ffc107;
+      color: #ffc107;
+      border-bottom: 3px solid #ffc107;
       text-shadow: 0 0 6px #ffc107bb;
     }
+
     main {
-      max-width: 600px; width: 95%;
-      background: #1e1e1e; border-radius: 12px;
-      padding: 25px 30px; margin: 30px auto;
+      max-width: 600px;
+      width: 95%;
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 25px 30px;
+      margin: 30px auto;
       box-shadow: 0 10px 25px rgb(211 47 47 / 0.4);
     }
 
@@ -45,17 +71,34 @@
       text-align: center;
       text-shadow: 0 0 5px #d32f2f99;
     }
-    h1 { font-size: 1.5rem; color: #ffc107; margin-bottom: 20px; }
-    h2 { font-size: 2rem; color: #d32f2f; margin-bottom: 25px; }
 
-    section { display: none; }
-    section.active { display: block; }
+    h1 {
+      font-size: 1.5rem;
+      color: #ffc107;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #d32f2f;
+      margin-bottom: 25px;
+    }
+
+    section {
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
 
     .staff-container {
-      display: flex; flex-wrap: wrap;
+      display: flex;
+      flex-wrap: wrap;
       gap: 10px;
       justify-content: space-between;
     }
+
     .staff-member {
       flex: 0 0 48%;
       background: #292929;
@@ -66,50 +109,118 @@
       cursor: pointer;
       position: relative;
       box-shadow: 0 2px 10px rgb(211 47 47 / 0.15);
+      user-select: none;
     }
+
     .staff-role {
       margin-top: 8px;
       color: #ffb74d;
       font-weight: 600;
       display: none;
     }
+
     .staff-member.active .staff-role {
       display: block;
     }
 
-    .staff-member[data-role="Chef"] { color: #f70000; }
-    .staff-member[data-role="Administrateur"] { color: #66b3ff; }
-    .staff-member[data-role="Super Modérateur"] { color: #3583cc; }
-    .staff-member[data-role="Modérateur"] { color: #2321a8; }
+    /* Couleurs rôles */
+    .staff-member[data-role="Chef"] { color: #b10000; }
+    .staff-member[data-role="Sous chef"] { color: #0cb254; }
+    .staff-member[data-role="Administrateur"] { color: #47b2ff; }
+    .staff-member[data-role="Super Modérateur"] { color: #087fff; }
+    .staff-member[data-role="Modérateur"] { color: #004ae9 }
 
-    .staff-member[data-role="Chef"] .staff-role { color: #ff4444; }
-    .staff-member[data-role="Administrateur"] .staff-role { color: #66b3ff; }
-    .staff-member[data-role="Super Modérateur"] .staff-role { color: #3583cc; }
-    .staff-member[data-role="Modérateur"] .staff-role { color: #2321a8; }
+    .staff-member[data-role="Chef"] .staff-role { color: #b10000; }
+    .staff-member[data-role="Sous chef"] .staff-role { color: #0cb254; }
+    .staff-member[data-role="Administrateur"] .staff-role { color: #47b2ff; }
+    .staff-member[data-role="Super Modérateur"] .staff-role { color: #087fff; }
+    .staff-member[data-role="Modérateur"] .staff-role { color: #004ae9; }
 
+    /* Règlement Discord */
+    section#discord {
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    #discord h1 {
+      font-size: 1.6rem;
+      color: #ffc107;
+      margin-bottom: 15px;
+      text-align: center;
+      text-shadow: 0 0 8px #d32f2f66;
+    }
+
+    #discord p {
+      background-color: #2a2a2a;
+      padding: 12px 15px;
+      border-left: 4px solid #d32f2f;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      color: #ddd;
+      transition: background 0.3s;
+    }
+
+    #discord p strong {
+      color: #ffc107;
+    }
+
+    #discord p:hover {
+      background-color: #333;
+    }
+
+    /* Vidéos */
     .video-item {
       margin-bottom: 20px;
-      padding: 10px;
+      padding: 15px;
       background: #2b2b2b;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
+
+    .video-item:hover {
+      background-color: #353535;
+    }
+
     .video-title {
-      color: #ffc107;
-      font-size: 1.2rem;
+      cursor: pointer;
+      color: #ffc107; /* jaune comme le site */
+      font-size: 1.3rem;
       margin: 0;
+      transition: color 0.3s;
+      font-weight: 700;
+      text-shadow: 0 0 4px #dcae00;
+      user-select: none;
     }
-    .video-summary {
-      margin-top: 10px;
-      display: none;
-      color: #ddd;
+
+    .video-title:hover {
+      color: #ffca28;
     }
-    .video-item.active .video-summary {
-      display: block;
-    }
+
     .video-meta {
       font-size: 0.9rem;
-      color: #aaa;
+      color: #999;
+      margin-top: 5px;
+    }
+
+    .video-summary {
+      margin-top: 10px;
+      padding: 12px 16px;
+      background-color: #1e1e1e;
+      border-left: 4px solid #ffc107; /* trait jaune */
+      color: #7f7f7f; /* gris qui jure un peu */
+      font-size: 0.95rem;
+      border-radius: 6px;
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+      font-family: 'Segoe UI', sans-serif;
+      font-weight: 500;
+      user-select: text;
+    }
+
+    .video-item.active .video-summary {
+      display: block;
     }
 
     #accept-button {
@@ -123,84 +234,175 @@
       border-radius: 6px;
       cursor: pointer;
     }
+
     #accept-button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
     }
+
+    /* Animation fadeIn */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Pour les écrans plus larges que 768px (tablettes/PC) */
+    @media (min-width: 768px) {
+      main {
+        max-width: 900px;  /* plus large que sur mobile */
+        width: 90%;
+        padding: 40px 50px;
+      }
+
+      nav {
+        max-width: 900px;
+      }
+
+      nav button {
+        max-width: none;
+        font-size: 1.2rem;
+      }
+
+      .staff-container {
+        justify-content: flex-start;
+      }
+
+      .staff-member {
+        flex: 0 0 30%; /* 3 par ligne sur grand écran */
+      }
+
+      /* Par exemple, agrandir un peu les titres */
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 2.8rem;
+      }
+    }
+
+    /* Barre de recherche */
+    #video-search {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      background-color: #292929;
+      color: #ffc107;
+      box-shadow: inset 0 0 5px #ffc107aa;
+      outline: none;
+    }
+
+    #video-search::placeholder {
+      color: #ffc107aa;
+    }
+
+    /* Suggestions sous la barre */
+    #suggestions {
+      background: #2b2b2b;
+      border-radius: 8px;
+      max-height: 180px;
+      overflow-y: auto;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    }
+
+    .suggestion-item {
+      padding: 10px 14px;
+      cursor: pointer;
+      color: #ffc107;
+      font-weight: 600;
+      border-bottom: 1px solid #444;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .suggestion-item:hover {
+      background-color: #353535;
+    }
+
+    .no-suggestion {
+      padding: 10px 14px;
+      color: #999;
+      font-style: italic;
+    }
+
+    /* Style personnalisé pour la section Accueil */
+.accueil-paragraphe p {
+  background-color: #2a2a2a;
+  padding: 14px 18px;
+  border-left: 4px solid #ffc107;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  color: #ddd;
+  line-height: 1.7;
+  box-shadow: 0 2px 6px rgba(255, 193, 7, 0.15);
+  transition: background-color 0.3s ease;
+}
+
+.accueil-paragraphe p:hover {
+  background-color: #333;
+}
+
+.accueil-paragraphe p strong {
+  color: #ffc107;
+}
+
+.accueil-paragraphe .merci {
+  text-align: center;
+  color: #ffc107;
+  font-weight: bold;
+  font-size: 1.05rem;
+  text-shadow: 0 0 6px #dcae00aa;
+}
+
   </style>
 </head>
 <body>
 
-  <nav>
-    <button class="active" onclick="setActive('home', event)">Accueil</button>
-    <button onclick="setActive('videos', event)">Vidéos</button>
-    <button onclick="setActive('discord', event)">Discord</button>
-  </nav>
+<nav>
+  <button class="tab-button active" data-target="accueil">Accueil</button>
+  <button class="tab-button" data-target="videos">Vidéos</button>
+  <button class="tab-button" data-target="discord">Discord</button>
+  <button class="tab-button" data-target="staff">Staff</button>
+</nav>
 
-  <main>
-    <section id="home" class="active">
-      <h1>Bienvenue sur ce site web dédié aux vidéos!<br>
-        Vous pouvez y trouver un résumé de chaque vidéo.<br>
-        Mais avant cela, découvrez les membres du staff :
-      </h1>
+<main>
+  <!-- Accueil -->
+  <section id="accueil" class="active">
 
-      <div class="staff-container">
-        <div class="staff-member" data-role="Chef">👑 BLZstarss
-          <div class="staff-role">Rôle : Chef</div>
-        </div>
-        <div class="staff-member" data-role="Sous chef">🥈 Aviator_man
-          <div class="staff-role">Rôle : Sous-chef</div>
-        </div>
-        <div class="staff-member" data-role="Administrateur">🛠️ Narakys
-          <div class="staff-role">Rôle : Administrateur</div>
-        </div>
-        <div class="staff-member" data-role="Administrateur">🛠️ Lapai
-          <div class="staff-role">Rôle : Administrateur</div>
-        </div>
-        <div class="staff-member" data-role="Administrateur">🛠️ Zibul
-          <div class="staff-role">Rôle : Administrateur</div>
-        </div>
-        <div class="staff-member" data-role="Super Modérateur">⭐ Abder
-          <div class="staff-role">Rôle : Super Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Super Modérateur">⭐ Vore
-          <div class="staff-role">Rôle : Super Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Super Modérateur">⭐ Rosalune
-          <div class="staff-role">Rôle : Super Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Super Modérateur">⭐ Jesse
-          <div class="staff-role">Rôle : Super Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Modérateur">🔨 Tosco
-          <div class="staff-role">Rôle : Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Modérateur">🔨 Nocturno
-          <div class="staff-role">Rôle : Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Modérateur">🔨 Gabz
-          <div class="staff-role">Rôle : Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Modérateur">🔨 Koyorin
-          <div class="staff-role">Rôle : Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Modérateur">🔨 Lanful
-          <div class="staff-role">Rôle : Modérateur</div>
-      </div>
-    
-      </div>
-    </section>
+  <div class="accueil-paragraphe">
+    <p>Bienvenue sur <strong>BLZstarss</strong>, votre plateforme incontournable pour suivre l’actualité et découvrir les dernières vidéos exclusives de notre serveur. Ici, la communauté est au cœur de tout : respect, entraide et bonne humeur.</p>
 
-    <section id="videos">
-      <h2>Nos Vidéos</h2>
-      <div id="videos-container"></div>
-    </section>
+    <p>Que vous soyez nouveau ou membre fidèle, vous trouverez ici un contenu riche et varié : divertissement, informations, analyses, critiques… tout est pensé pour vous offrir une expérience complète et agréable.</p>
 
-    <section id="discord">
-      <h2>Discord</h2>
-      <h1>Règlement BLZstarss</h1>
+    <p>Explorez librement nos différentes rubriques : <strong>vidéos populaires</strong>, <strong>règlement du serveur Discord</strong>, et <strong>présentation de l’équipe</strong> – chaque section a été conçue pour vous informer et vous intégrer pleinement.</p>
 
-  <p><strong>Acceptez le règlement de BLZstarss pour accéder à l'intégralité du serveur</strong></p>
+    <p>Nous construisons ensemble une communauté forte, unie autour de valeurs simples : respect, partage et passion. N’hésitez pas à participer, poser vos questions ou proposer vos idées !</p>
+
+    <p class="merci">Merci d’être avec nous. Bonne visite sur <strong>BLZstarss</strong> !</p>
+  </div>
+</section>
+
+
+  <!-- Vidéos -->
+  <section id="videos">
+    <input type="search" id="video-search" placeholder="Rechercher une vidéo..." autocomplete="off" />
+    <div id="suggestions"></div>
+    <div id="videos-container"></div>
+  </section>
+
+  <!-- Discord -->
+  <section id="discord">
+    <p><strong>Acceptez le règlement de BLZstarss pour accéder à l'intégralité du serveur</strong></p>
 
   <p><strong>Système d'avertissements</strong><br />
   Quand vous recevez une sanction ou que vous avez fait quelque chose de pas très grave, vous recevez un <strong>warn</strong>. Tous les <strong>5 warns</strong>, vous prenez <strong>1 jour d’exclusion</strong>. Si votre nombre de warns devient trop élevé, le staff peut envisager de vous <strong>bannir</strong>.</p>
@@ -267,31 +469,82 @@
 
   <p><strong>Spoil</strong><br />
   Le spoil est interdit et puni d’un avertissement.</p>
+    <button id="accept-button">Accepter le règlement</button>
+  </section>
 
-  <p><strong>Application des Conditions d'Utilisation de Discord</strong><br />
-  Les ToS de Discord s’appliquent aussi ici. Toute violation entraîne des sanctions adaptées.</p>
-      <button id="accept-button">Accepter le règlement</button>
-    </section>
-  </main>
+  <!-- Staff -->
+  <section id="staff">
+    
+    <div class="staff-container">
+      <div class="staff-container">
+        <div class="staff-member" data-role="Chef">👑 BLZstarss
+          <div class="staff-role">Rôle : Chef</div>
+        </div>
+        <div class="staff-member" data-role="Sous chef">🥈 Aviator_man
+          <div class="staff-role">Rôle : Sous-chef</div>
+        </div>
+        <div class="staff-member" data-role="Administrateur">🛠️ Narakys
+          <div class="staff-role">Rôle : Administrateur</div>
+        </div>
+        <div class="staff-member" data-role="Administrateur">🛠️ Lapai
+          <div class="staff-role">Rôle : Administrateur</div>
+        </div>
+        <div class="staff-member" data-role="Administrateur">🛠️ Zibul
+          <div class="staff-role">Rôle : Administrateur</div>
+        </div>
+        <div class="staff-member" data-role="Super Modérateur">⭐ Abder
+          <div class="staff-role">Rôle : Super Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Super Modérateur">⭐ Vore
+          <div class="staff-role">Rôle : Super Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Super Modérateur">⭐ Rosalune
+          <div class="staff-role">Rôle : Super Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Super Modérateur">⭐ Jesse
+          <div class="staff-role">Rôle : Super Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">🔨 Tosco
+          <div class="staff-role">Rôle : Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">🔨 Nocturno
+          <div class="staff-role">Rôle : Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">🔨 Gabz
+          <div class="staff-role">Rôle : Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">🔨 Koyorin
+          <div class="staff-role">Rôle : Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">🔨 Lanful
+          <div class="staff-role">Rôle : Modérateur</div>
+      </div>
+    </div>
+  </section>
+</main>
 
-  <script>
-  // Gère l'onglet actif
-  function setActive(id, event) {
-    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
-    document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-    event.target.classList.add("active");
-  }
+<script>
+  // Navigation onglets
+  const tabButtons = document.querySelectorAll('nav .tab-button');
+  const sections = document.querySelectorAll('main > section');
 
-  // Affiche/Masque le rôle du staff au clic
-  document.querySelectorAll('.staff-member').forEach(member => {
-    member.addEventListener('click', () => {
-      member.classList.toggle('active');
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      sections.forEach(sec => {
+        if (sec.id === btn.dataset.target) {
+          sec.classList.add('active');
+        } else {
+          sec.classList.remove('active');
+        }
+      });
     });
   });
 
-  // Génère la liste des vidéos
-  const videos = [
+  // Données vidéos
+   const videos = [
   {
     title: "La Chute Inévitable de Dream...",
     views: "17 k vues",
@@ -546,29 +799,120 @@
   }
 ];
 
-
-  const container = document.getElementById("videos-container");
-  videos.forEach(v => {
-    const item = document.createElement("div");
-    item.className = "video-item";
-    item.innerHTML = `
-      <h3 class="video-title">${v.title}</h3>
-      <div class="video-meta">${v.views} • ${v.date}</div>
-      <div class="video-summary">${v.summary}</div>
-    `;
-    item.querySelector('.video-title').addEventListener('click', () => {
-      item.classList.toggle('active');
+   // Afficher les rôles des membres du staff
+  document.querySelectorAll('.staff-member').forEach(member => {
+    member.addEventListener('click', () => {
+      member.classList.toggle('active');
     });
-    container.appendChild(item);
   });
 
-  // Redirection Discord avec délai
-  document.getElementById("accept-button").addEventListener("click", () => {
-    const btn = document.getElementById("accept-button");
-    btn.disabled = true;
-    btn.textContent = "Redirection dans 4 secondes...";
+  const searchInput = document.getElementById("video-search");
+  const suggestionsDiv = document.getElementById("suggestions");
+  const videosContainer = document.getElementById("videos-container");
+
+  // Affiche les vidéos dans la zone principale
+  function displayVideos(videosList) {
+    videosContainer.innerHTML = "";
+    if(videosList.length === 0) {
+      videosContainer.innerHTML = '<p style="color:#999; font-style:italic;">Aucune vidéo trouvée.</p>';
+      return;
+    }
+    videosList.forEach(video => {
+      const div = document.createElement("div");
+      div.className = "video-item";
+
+      const title = document.createElement("h3");
+      title.className = "video-title";
+      title.textContent = video.title;
+
+      const infos = document.createElement("p");
+      infos.className = "video-meta";
+      infos.textContent = `${video.views} • ${video.date}`;
+
+      const summary = document.createElement("div");
+      summary.className = "video-summary";
+      summary.textContent = video.summary;
+
+      // Toggle résumé au clic sur le titre
+      title.addEventListener("click", () => {
+        div.classList.toggle("active");
+      });
+
+      div.appendChild(title);
+      div.appendChild(infos);
+      div.appendChild(summary);
+      videosContainer.appendChild(div);
+    });
+  }
+
+  // Affiche toutes les vidéos au départ
+  displayVideos(videos);
+
+  // Affiche les suggestions
+  function displaySuggestions(filteredVideos) {
+    suggestionsDiv.innerHTML = "";
+    if(filteredVideos.length === 0) {
+      suggestionsDiv.innerHTML = '<div class="no-suggestion">Aucune suggestion</div>';
+      return;
+    }
+    filteredVideos.forEach(video => {
+      const div = document.createElement("div");
+      div.className = "suggestion-item";
+      div.textContent = video.title;
+      div.addEventListener("click", () => {
+        searchInput.value = video.title;
+        suggestionsDiv.innerHTML = "";
+        displayVideos([video]);
+      });
+      suggestionsDiv.appendChild(div);
+    });
+  }
+
+  // Filtrer les vidéos en fonction de la recherche
+  function filterVideos(query) {
+    if(!query) {
+      suggestionsDiv.innerHTML = "";
+      return;
+    }
+    const filtered = videos.filter(video => 
+      video.title.toLowerCase().includes(query.toLowerCase())
+    );
+    displaySuggestions(filtered);
+  }
+
+  // Événement sur la barre de recherche
+  searchInput.addEventListener("input", e => {
+    const query = e.target.value.trim();
+    filterVideos(query);
+    if(!query) {
+      displayVideos(videos);
+    }
+  });
+
+const staffMembers = document.querySelectorAll('.staff-member');
+
+staffMembers.forEach(member => {
+  member.addEventListener('click', () => {
+    // On cible uniquement le rôle contenu dans cet élément
+    const role = member.querySelector('.role');
+    if (role) {
+      role.classList.toggle('active');
+    }
+  });
+});
+
+
+  // Bouton accepter règlement (exemple, tu peux ajouter la redirection)
+  const acceptBtn = document.getElementById('accept-button');
+  acceptBtn.addEventListener('click', () => {
+    acceptBtn.disabled = true;
+    acceptBtn.textContent = 'Redirection dans 4 secondes...';
     setTimeout(() => {
-      window.location.href = "https://discord.gg/UarWXUgXJE";
+      // Ici tu mets la redirection vers le Discord
+      // window.location.href = "https://discord.gg/tonserveur";
+      alert("Ici tu peux faire la redirection vers Discord !");
+      acceptBtn.disabled = false;
+      acceptBtn.textContent = "Accepter le règlement";
     }, 4000);
   });
 </script>

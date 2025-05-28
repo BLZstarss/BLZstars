@@ -6,362 +6,450 @@
   <title>BLZstarss</title>
   <link rel="icon" href="channels4_profile.jpg" type="image/png" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
+   *, *::before, *::after { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #121212;
-      color: #eee;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    header {
-      background: #1b1b1b;
-      color: #d32f2f;
-      padding: 20px 0;
-      font-size: 2rem;
-      text-align: center;
-      border-bottom: 3px solid #d32f2f;
-      width: 100%;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      background: #1b1b1b;
-      width: 100%;
-      max-width: 600px;
-      border-bottom: 2px solid #d32f2f;
-    }
-
-    nav button {
-      flex: 1;
-      max-width: 200px;
-      background: transparent;
-      border: none;
-      padding: 18px 0;
-      color: #bbb;
-      font-weight: 600;
-      font-size: 1.1rem;
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      transition: color 0.3s, border-bottom-color 0.3s;
-    }
-
-    nav button.active {
-      color: #ffc107;
-      border-bottom: 3px solid #ffc107;
-      text-shadow: 0 0 6px #ffc107bb;
-    }
-
-    main {
-      max-width: 600px;
-      width: 95%;
-      background: #1e1e1e;
-      border-radius: 12px;
-      padding: 25px 30px;
-      margin: 30px auto;
-      box-shadow: 0 10px 25px rgb(211 47 47 / 0.4);
-    }
-
-    h1, h2 {
-      text-align: center;
-      text-shadow: 0 0 5px #d32f2f99;
-    }
-
-    h1 {
-      font-size: 1.5rem;
-      color: #ffc107;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      font-size: 2rem;
-      color: #d32f2f;
-      margin-bottom: 25px;
-    }
-
-    section {
-      display: none;
-    }
-
-    section.active {
-      display: block;
-    }
-
-    .staff-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: space-between;
-    }
-
-    .staff-member {
-      flex: 0 0 48%;
-      background: #292929;
-      padding: 14px 18px;
-      border-radius: 10px;
-      color: #ffc107;
-      font-weight: 700;
-      cursor: pointer;
-      position: relative;
-      box-shadow: 0 2px 10px rgb(211 47 47 / 0.15);
-      user-select: none;
-    }
-
-    .staff-role {
-      margin-top: 8px;
-      color: #ffb74d;
-      font-weight: 600;
-      display: none;
-    }
-
-    .staff-member.active .staff-role {
-      display: block;
-    }
-
-    /* Couleurs rôles */
-    .staff-member[data-role="Chef"] { color: #b10000; }
-    .staff-member[data-role="Sous chef"] { color: #0cb254; }
-    .staff-member[data-role="Administrateur"] { color: #47b2ff; }
-    .staff-member[data-role="Super Modérateur"] { color: #087fff; }
-    .staff-member[data-role="Modérateur"] { color: #004ae9 }
-
-    .staff-member[data-role="Chef"] .staff-role { color: #b10000; }
-    .staff-member[data-role="Sous chef"] .staff-role { color: #0cb254; }
-    .staff-member[data-role="Administrateur"] .staff-role { color: #47b2ff; }
-    .staff-member[data-role="Super Modérateur"] .staff-role { color: #087fff; }
-    .staff-member[data-role="Modérateur"] .staff-role { color: #004ae9; }
-
-    /* Règlement Discord */
-    section#discord {
-      line-height: 1.6;
-      font-size: 1rem;
-    }
-
-    #discord h1 {
-      font-size: 1.6rem;
-      color: #ffc107;
-      margin-bottom: 15px;
-      text-align: center;
-      text-shadow: 0 0 8px #d32f2f66;
-    }
-
-    #discord p {
-      background-color: #2a2a2a;
-      padding: 12px 15px;
-      border-left: 4px solid #d32f2f;
-      border-radius: 6px;
-      margin-bottom: 12px;
-      color: #ddd;
-      transition: background 0.3s;
-    }
-
-    #discord p strong {
-      color: #ffc107;
-    }
-
-    #discord p:hover {
-      background-color: #333;
-    }
-
-    /* Vidéos */
-    .video-item {
-      margin-bottom: 20px;
-      padding: 15px;
-      background: #2b2b2b;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .video-item:hover {
-      background-color: #353535;
-    }
-
-    .video-title {
-      cursor: pointer;
-      color: #ffc107; /* jaune comme le site */
-      font-size: 1.3rem;
-      margin: 0;
-      transition: color 0.3s;
-      font-weight: 700;
-      text-shadow: 0 0 4px #dcae00;
-      user-select: none;
-    }
-
-    .video-title:hover {
-      color: #ffca28;
-    }
-
-    .video-meta {
-      font-size: 0.9rem;
-      color: #999;
-      margin-top: 5px;
-    }
-
-    .video-summary {
-      margin-top: 10px;
-      padding: 12px 16px;
-      background-color: #1e1e1e;
-      border-left: 4px solid #ffc107; /* trait jaune */
-      color: #7f7f7f; /* gris qui jure un peu */
-      font-size: 0.95rem;
-      border-radius: 6px;
-      display: none;
-      animation: fadeIn 0.3s ease-in-out;
-      font-family: 'Segoe UI', sans-serif;
-      font-weight: 500;
-      user-select: text;
-    }
-
-    .video-item.active .video-summary {
-      display: block;
-    }
-
-    #accept-button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #d32f2f;
-      border: none;
-      color: white;
-      font-weight: bold;
-      font-size: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    #accept-button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    /* Animation fadeIn */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-5px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Pour les écrans plus larges que 768px (tablettes/PC) */
-    @media (min-width: 768px) {
-      main {
-        max-width: 900px;  /* plus large que sur mobile */
-        width: 90%;
-        padding: 40px 50px;
-      }
-
-      nav {
-        max-width: 900px;
-      }
-
-      nav button {
-        max-width: none;
-        font-size: 1.2rem;
-      }
-
-      .staff-container {
-        justify-content: flex-start;
-      }
-
-      .staff-member {
-        flex: 0 0 30%; /* 3 par ligne sur grand écran */
-      }
-
-      /* Par exemple, agrandir un peu les titres */
-      h1 {
-        font-size: 2rem;
-      }
-
-      h2 {
-        font-size: 2.8rem;
-      }
-    }
-
-    /* Barre de recherche */
-    #video-search {
-      width: 100%;
-      padding: 12px 15px;
-      border-radius: 8px;
-      border: none;
-      font-size: 1.1rem;
-      margin-bottom: 15px;
-      background-color: #292929;
-      color: #ffc107;
-      box-shadow: inset 0 0 5px #ffc107aa;
-      outline: none;
-    }
-
-    #video-search::placeholder {
-      color: #ffc107aa;
-    }
-
-    /* Suggestions sous la barre */
-    #suggestions {
-      background: #2b2b2b;
-      border-radius: 8px;
-      max-height: 180px;
-      overflow-y: auto;
-      margin-bottom: 25px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.6);
-    }
-
-    .suggestion-item {
-      padding: 10px 14px;
-      cursor: pointer;
-      color: #ffc107;
-      font-weight: 600;
-      border-bottom: 1px solid #444;
-      user-select: none;
-      transition: background-color 0.3s ease;
-    }
-
-    .suggestion-item:hover {
-      background-color: #353535;
-    }
-
-    .no-suggestion {
-      padding: 10px 14px;
-      color: #999;
-      font-style: italic;
-    }
-
-    /* Style personnalisé pour la section Accueil */
-.accueil-paragraphe p {
-  background-color: #2a2a2a;
-  padding: 14px 18px;
-  border-left: 4px solid #ffc107;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  color: #ddd;
-  line-height: 1.7;
-  box-shadow: 0 2px 6px rgba(255, 193, 7, 0.15);
-  transition: background-color 0.3s ease;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #121212;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.accueil-paragraphe p:hover {
+/* Appliquer le même style que #discord à #accueil */
+/* Appliquer le même style que #discord à #accueil */
+#accueil {
+  line-height: 1.6;
+  font-size: 1rem;
+  background-color: #2a2a2a;
+  padding: 12px 15px;
+  
+  border-radius: 6px;
+  color: #ddd;
+  margin-bottom: 12px;
+  transition: background 0.3s;
+  box-shadow: 0 2px 10px rgb(211 47 47 / 0.15);
+}
+
+#accueil h1 {
+  font-size: 1.6rem;
+  color: #ffc107;
+  margin-bottom: 15px;
+  text-align: center;
+  text-shadow: 0 0 8px #d32f2f66;
+}
+
+#accueil p {
+  background-color: #2a2a2a;
+  padding: 12px 15px;
+  border-left: 4px solid #d32f2f;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  color: #ddd;
+  transition: background 0.3s;
+}
+
+#accueil p strong {
+  color: #ffc107;
+}
+
+#accueil p:hover {
   background-color: #333;
 }
 
-.accueil-paragraphe p strong {
+
+
+
+header {
+  background: #1b1b1b;
+  color: #d32f2f;
+  padding: 20px 0;
+  font-size: 2rem;
+  text-align: center;
+  border-bottom: 3px solid #d32f2f;
+  width: 100%;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  background: #1b1b1b;
+  width: 100%;
+  max-width: 600px;
+  border-bottom: 2px solid #d32f2f;
+}
+
+nav button {
+  flex: 1;
+  max-width: 200px;
+  background: transparent;
+  border: none;
+  padding: 18px 0;
+  color: #bbb;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: color 0.3s, border-bottom-color 0.3s;
+}
+
+nav button.active {
+  color: #ffc107;
+  border-bottom: 3px solid #ffc107;
+  text-shadow: 0 0 6px #ffc107bb;
+}
+
+main {
+  max-width: 600px;
+  width: 95%;
+  background: #1e1e1e;
+  border-radius: 12px;
+  padding: 25px 30px;
+  margin: 30px auto;
+  box-shadow: 0 10px 25px rgb(211 47 47 / 0.4);
+}
+
+h1, h2 {
+  text-align: center;
+  text-shadow: 0 0 5px #d32f2f99;
+}
+
+h1 {
+  font-size: 1.5rem;
+  color: #ffc107;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #d32f2f;
+  margin-bottom: 25px;
+}
+
+section {
+  display: none;
+}
+
+#bot-search {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  background-color: #292929;
+  color: #ffc107;
+  box-shadow: inset 0 0 5px #ffc107aa;
+  outline: none;
+}
+
+#bot-search::placeholder {
+  color: #ffc107aa;
+}
+
+section.active {
+  display: block;
+}
+
+.staff-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.staff-member {
+  flex: 0 0 48%;
+  background: #292929;
+  padding: 14px 18px;
+  border-radius: 10px;
+  color: #ffc107;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 2px 10px rgb(211 47 47 / 0.15);
+  user-select: none;
+}
+
+.staff-role {
+  margin-top: 8px;
+  color: #ffb74d;
+  font-weight: 600;
+  display: none;
+}
+
+.staff-member.active .staff-role {
+  display: block;
+}
+
+/* Couleurs rôles */
+.staff-member[data-role="Chef"] { color: #b10000; }
+.staff-member[data-role="Sous chef"] { color: #0cb254; }
+.staff-member[data-role="Administrateur"] { color: #47b2ff; }
+.staff-member[data-role="Super Modérateur"] { color: #087fff; }
+.staff-member[data-role="Modérateur"] { color: #004ae9 }
+
+.staff-member[data-role="Chef"] .staff-role { color: #b10000; }
+.staff-member[data-role="Sous chef"] .staff-role { color: #0cb254; }
+.staff-member[data-role="Administrateur"] .staff-role { color: #47b2ff; }
+.staff-member[data-role="Super Modérateur"] .staff-role { color: #087fff; }
+.staff-member[data-role="Modérateur"] .staff-role { color: #004ae9; }
+
+/* Règlement Discord */
+section#discord {
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+#discord h1 {
+  font-size: 1.6rem;
+  color: #ffc107;
+  margin-bottom: 15px;
+  text-align: center;
+  text-shadow: 0 0 8px #d32f2f66;
+}
+
+#discord p {
+  background-color: #2a2a2a;
+  padding: 12px 15px;
+  border-left: 4px solid #d32f2f;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  color: #ddd;
+  transition: background 0.3s;
+}
+
+#discord p strong {
   color: #ffc107;
 }
 
-.accueil-paragraphe .merci {
-  text-align: center;
-  color: #ffc107;
+#discord p:hover {
+  background-color: #333;
+}
+
+/* Vidéos */
+.video-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #2b2b2b;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.video-item:hover {
+  background-color: #353535;
+}
+
+.video-title {
+  cursor: pointer;
+  color: #ffc107; /* jaune comme le site */
+  font-size: 1.3rem;
+  margin: 0;
+  transition: color 0.3s;
+  font-weight: 700;
+  text-shadow: 0 0 4px #dcae00;
+  user-select: none;
+}
+
+.video-title:hover {
+  color: #ffca28;
+}
+
+.video-meta {
+  font-size: 0.9rem;
+  color: #999;
+  margin-top: 5px;
+}
+
+.video-summary {
+  margin-top: 10px;
+  padding: 12px 16px;
+  background-color: #1e1e1e;
+  border-left: 4px solid #ffc107; /* trait jaune */
+  color: #7f7f7f; /* gris qui jure un peu */
+  font-size: 0.95rem;
+  border-radius: 6px;
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 500;
+  user-select: text;
+}
+
+.video-item.active .video-summary {
+  display: block;
+}
+
+#accept-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #d32f2f;
+  border: none;
+  color: white;
   font-weight: bold;
-  font-size: 1.05rem;
-  text-shadow: 0 0 6px #dcae00aa;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#accept-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Animation fadeIn */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pour les écrans plus larges que 768px (tablettes/PC) */
+@media (min-width: 768px) {
+  main {
+    max-width: 900px;  /* plus large que sur mobile */
+    width: 90%;
+    padding: 40px 50px;
+  }
+
+  nav {
+    max-width: 900px;
+  }
+
+  nav button {
+    max-width: none;
+    font-size: 1.2rem;
+  }
+
+  .staff-container {
+    justify-content: flex-start;
+  }
+
+  .staff-member {
+    flex: 0 0 30%; /* 3 par ligne sur grand écran */
+  }
+
+  /* Par exemple, agrandir un peu les titres */
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 2.8rem;
+  }
+}
+
+/* Barre de recherche */
+#video-search {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  background-color: #292929;
+  color: #ffc107;
+  box-shadow: inset 0 0 5px #ffc107aa;
+  outline: none;
+}
+
+#video-search::placeholder {
+  color: #ffc107aa;
+}
+
+/* Commandes Bot - même style que vidéos */
+.bot-command {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #2b2b2b;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.bot-command:hover {
+  background-color: #353535;
+}
+
+.bot-title {
+  cursor: pointer;
+  color: #ffc107;
+  font-size: 1.3rem;
+  margin: 0;
+  transition: color 0.3s;
+  font-weight: 700;
+  text-shadow: 0 0 4px #dcae00;
+  user-select: none;
+}
+
+.bot-title:hover {
+  color: #ffca28;
+}
+
+.bot-description {
+  margin-top: 10px;
+  padding: 12px 16px;
+  background-color: #1e1e1e;
+  border-left: 4px solid #ffc107;
+  color: #7f7f7f;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 500;
+  user-select: text;
+}
+
+.bot-description.active {
+  display: block;
+}
+
+/* Suggestions sous la barre */
+#suggestions {
+  background: #2b2b2b;
+  border-radius: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+
+.suggestion-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  color: #ffc107;
+  font-weight: 600;
+  border-bottom: 1px solid #444;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.suggestion-item:hover {
+  background-color: #353535;
+}
+
+.no-suggestion {
+  padding: 10px 14px;
+  color: #999;
+  font-style: italic;
+}
+
+/* Style personnalisé pour la barre de recherche bot quand active */
+#bot-search:focus {
+  box-shadow: 0 0 8px #ffc107bb;
+  background-color: #353535;
+  color: #fff;
 }
 
   </style>
@@ -372,8 +460,11 @@
   <button class="tab-button active" data-target="accueil">Accueil</button>
   <button class="tab-button" data-target="videos">Vidéos</button>
   <button class="tab-button" data-target="discord">Discord</button>
+  <button class="tab-button" data-target="bot">Bot</button> 
   <button class="tab-button" data-target="staff">Staff</button>
+  
 </nav>
+
 
 <main>
   <!-- Accueil -->
@@ -472,6 +563,16 @@
     <button id="accept-button">Accepter le règlement</button>
   </section>
 
+  <!-- bot -->
+
+  <section id="bot">
+  <input type="text" id="bot-search" placeholder="Rechercher une commande...">
+  <div id="bot-suggestions"></div>
+  <div id="bot-container"></div>
+</section>
+
+
+
   <!-- Staff -->
   <section id="staff">
     
@@ -524,27 +625,27 @@
 </main>
 
 <script>
-  // Navigation onglets
-  const tabButtons = document.querySelectorAll('nav .tab-button');
-  const sections = document.querySelectorAll('main > section');
+  // === Onglets de navigation ===
+const tabButtons = document.querySelectorAll('nav .tab-button');
+const sections = document.querySelectorAll('main > section');
 
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 
-      sections.forEach(sec => {
-        if (sec.id === btn.dataset.target) {
-          sec.classList.add('active');
-        } else {
-          sec.classList.remove('active');
-        }
-      });
+    sections.forEach(sec => {
+      if (sec.id === btn.dataset.target) {
+        sec.classList.add('active');
+      } else {
+        sec.classList.remove('active');
+      }
     });
   });
+});
 
-  // Données vidéos
-   const videos = [
+// === Exemple de vidéos (remplace/complète avec la vraie liste) ===
+const videos = [
   {
     title: "La Chute Inévitable de Dream...",
     views: "17 k vues",
@@ -799,101 +900,132 @@
   }
 ];
 
-   // Afficher les rôles des membres du staff
+// === Commandes du Bot (exemple) ===
+const botCommands = [
+  {
+    title: "info-bot",
+    status: "Disponible",
+    description: "cette commande sert a connaître les informations principales du bot."
+  },
+  {
+    title: "bug",
+    status: "En réparation",
+    description: "quand vous remarquez un bug vous pouvez l'exécuter en détaillant le plus possible le problème je recevrais un message pour que je puisse régler le bug !."
+  },
+    {
+    title: "points",
+    status: "Disponible",
+    description: " cela vous permet de voir combien vous avez de points (plus d'infos a propos des points ci dessous)"
+  },
+  {
+    title: "toppoints",
+    status: "Disponible",
+    description: "cette commande vous permet de voir le to 10 des premiers utilisateur a avoir des points."
+  },
+    {
+    title: "stats",
+    status: "En réparation",
+    description: "cela vous permet de voir les statistiques principales comme les modérateur, les modérateur en ligne etc."
+  },
+  {
+    title: "bug",
+    status: "Disponible",
+    description: "cela vous permet de signaler les bugs ! (ce qui m'est très utile)."
+  }
+];
+// Afficher les rôles des membres du staff
   document.querySelectorAll('.staff-member').forEach(member => {
     member.addEventListener('click', () => {
       member.classList.toggle('active');
     });
   });
 
-  const searchInput = document.getElementById("video-search");
-  const suggestionsDiv = document.getElementById("suggestions");
-  const videosContainer = document.getElementById("videos-container");
+const botSearchInput = document.getElementById("bot-search");
+const botSuggestions = document.getElementById("bot-suggestions");
+const botContainer = document.getElementById("bot-container");
 
-  // Affiche les vidéos dans la zone principale
-  function displayVideos(videosList) {
-    videosContainer.innerHTML = "";
-    if(videosList.length === 0) {
-      videosContainer.innerHTML = '<p style="color:#999; font-style:italic;">Aucune vidéo trouvée.</p>';
-      return;
-    }
-    videosList.forEach(video => {
-      const div = document.createElement("div");
-      div.className = "video-item";
+function displayBotCommands(commands) {
+  if (!botContainer) return;
+  botContainer.innerHTML = "";
 
-      const title = document.createElement("h3");
-      title.className = "video-title";
-      title.textContent = video.title;
+  if (commands.length === 0) {
+    botContainer.innerHTML = '<p style="color:#999; font-style:italic;">Aucune commande trouvée.</p>';
+    return;
+  }
 
-      const infos = document.createElement("p");
-      infos.className = "video-meta";
-      infos.textContent = `${video.views} • ${video.date}`;
+  commands.forEach(command => {
+    const div = document.createElement("div");
+    div.className = "bot-command";
 
-      const summary = document.createElement("div");
-      summary.className = "video-summary";
-      summary.textContent = video.summary;
+    const title = document.createElement("h3");
+    title.className = "bot-title";
+    title.textContent = `${command.title} (${command.status})`;
 
-      // Toggle résumé au clic sur le titre
-      title.addEventListener("click", () => {
-        div.classList.toggle("active");
-      });
+    const desc = document.createElement("div");
+    desc.className = "bot-description";
+    desc.textContent = command.description;
 
-      div.appendChild(title);
-      div.appendChild(infos);
-      div.appendChild(summary);
-      videosContainer.appendChild(div);
+    // Clic pour afficher/masquer la description
+    title.addEventListener("click", () => {
+      desc.classList.toggle("active");
     });
+
+    div.appendChild(title);
+    div.appendChild(desc);
+    botContainer.appendChild(div);
+  });
+}
+
+function filterBotCommands(query) {
+  if (!botSuggestions) return;
+  if (!query) {
+    botSuggestions.innerHTML = "";
+    return;
+  }
+  const filtered = botCommands.filter(cmd =>
+    cmd.title.toLowerCase().includes(query.toLowerCase())
+  );
+
+  displayBotSuggestions(filtered);
+}
+
+function displayBotSuggestions(filtered) {
+  if (!botSuggestions) return;
+  botSuggestions.innerHTML = "";
+  if (filtered.length === 0) {
+    botSuggestions.innerHTML = '<div class="no-suggestion">Aucune suggestion</div>';
+    return;
   }
 
-  // Affiche toutes les vidéos au départ
-  displayVideos(videos);
-
-  // Affiche les suggestions
-  function displaySuggestions(filteredVideos) {
-    suggestionsDiv.innerHTML = "";
-    if(filteredVideos.length === 0) {
-      suggestionsDiv.innerHTML = '<div class="no-suggestion">Aucune suggestion</div>';
-      return;
-    }
-    filteredVideos.forEach(video => {
-      const div = document.createElement("div");
-      div.className = "suggestion-item";
-      div.textContent = video.title;
-      div.addEventListener("click", () => {
-        searchInput.value = video.title;
-        suggestionsDiv.innerHTML = "";
-        displayVideos([video]);
-      });
-      suggestionsDiv.appendChild(div);
+  filtered.forEach(cmd => {
+    const div = document.createElement("div");
+    div.className = "suggestion-item";
+    div.textContent = cmd.title;
+    div.addEventListener("click", () => {
+      if (botSearchInput) botSearchInput.value = cmd.title;
+      botSuggestions.innerHTML = "";
+      displayBotCommands([cmd]);
     });
-  }
+    botSuggestions.appendChild(div);
+  });
+}
 
-  // Filtrer les vidéos en fonction de la recherche
-  function filterVideos(query) {
-    if(!query) {
-      suggestionsDiv.innerHTML = "";
-      return;
-    }
-    const filtered = videos.filter(video => 
-      video.title.toLowerCase().includes(query.toLowerCase())
-    );
-    displaySuggestions(filtered);
-  }
-
-  // Événement sur la barre de recherche
-  searchInput.addEventListener("input", e => {
+if (botSearchInput) {
+  botSearchInput.addEventListener("input", e => {
     const query = e.target.value.trim();
-    filterVideos(query);
-    if(!query) {
-      displayVideos(videos);
+    filterBotCommands(query);
+    if (!query) {
+      displayBotCommands(botCommands);
     }
   });
+}
 
+displayBotCommands(botCommands);
+
+// === Affichage des rôles Staff ===
 const staffMembers = document.querySelectorAll('.staff-member');
-
 staffMembers.forEach(member => {
   member.addEventListener('click', () => {
-    // On cible uniquement le rôle contenu dans cet élément
     const role = member.querySelector('.role');
     if (role) {
       role.classList.toggle('active');
@@ -901,21 +1033,107 @@ staffMembers.forEach(member => {
   });
 });
 
-
-  // Bouton accepter règlement (exemple, tu peux ajouter la redirection)
-  const acceptBtn = document.getElementById('accept-button');
+// === Bouton "Accepter le règlement" ===
+const acceptBtn = document.getElementById('accept-button');
+if (acceptBtn) {
   acceptBtn.addEventListener('click', () => {
     acceptBtn.disabled = true;
-    acceptBtn.textContent = 'Redirection dans 4 secondes...';
+    acceptBtn.textContent = "Redirection...";
     setTimeout(() => {
-      // Ici tu mets la redirection vers le Discord
-      // window.location.href = "https://discord.gg/tonserveur";
-      alert("Ici tu peux faire la redirection vers Discord !");
-      acceptBtn.disabled = false;
-      acceptBtn.textContent = "Accepter le règlement";
+      window.location.href = "https://discord.gg/ton-lien"; // Remplace par ton lien d'invitation réel
     }, 4000);
   });
+}
+
+// === Gestion des vidéos (affichage, recherche, suggestions) ===
+const searchInput = document.getElementById("video-search");
+const suggestionsDiv = document.getElementById("suggestions");
+const videosContainer = document.getElementById("videos-container");
+
+function displayVideos(videosList) {
+  if (!videosContainer) return;
+  videosContainer.innerHTML = "";
+  if (videosList.length === 0) {
+    videosContainer.innerHTML = '<p style="color:#999; font-style:italic;">Aucune vidéo trouvée.</p>';
+    return;
+  }
+
+  videosList.forEach(video => {
+    const div = document.createElement("div");
+    div.className = "video-item";
+
+    const title = document.createElement("h3");
+    title.className = "video-title";
+    title.textContent = video.title;
+
+    const infos = document.createElement("p");
+    infos.className = "video-meta";
+    infos.textContent = `${video.views} • ${video.date}`;
+
+    const summary = document.createElement("div");
+    summary.className = "video-summary";
+    summary.textContent = video.summary;
+
+    title.addEventListener("click", () => {
+      div.classList.toggle("active");
+    });
+
+    div.appendChild(title);
+    div.appendChild(infos);
+    div.appendChild(summary);
+    videosContainer.appendChild(div);
+  });
+}
+
+function displaySuggestions(filteredVideos) {
+  if (!suggestionsDiv) return;
+  suggestionsDiv.innerHTML = "";
+  if (filteredVideos.length === 0) {
+    suggestionsDiv.innerHTML = '<div class="no-suggestion">Aucune suggestion</div>';
+    return;
+  }
+
+  filteredVideos.forEach(video => {
+    const div = document.createElement("div");
+    div.className = "suggestion-item";
+    div.textContent = video.title;
+    div.addEventListener("click", () => {
+      if (searchInput) searchInput.value = video.title;
+      suggestionsDiv.innerHTML = "";
+      displayVideos([video]);
+    });
+    suggestionsDiv.appendChild(div);
+  });
+}
+
+function filterVideos(query) {
+  if (!suggestionsDiv) return;
+  if (!query) {
+    suggestionsDiv.innerHTML = "";
+    return;
+  }
+  const filtered = videos.filter(video =>
+    video.title.toLowerCase().includes(query.toLowerCase())
+  );
+  displaySuggestions(filtered);
+}
+
+if (searchInput) {
+  searchInput.addEventListener("input", e => {
+    const query = e.target.value.trim();
+    filterVideos(query);
+    if (!query) {
+      displayVideos(videos);
+    }
+  });
+}
+
+// Afficher toutes les vidéos au chargement
+displayVideos(videos);
+
+
 </script>
+
 
 </body>
 </html>

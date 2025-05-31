@@ -466,38 +466,54 @@ section#discord {
     margin: 30px auto;
     text-align: left;
     box-sizing: border-box;
-    overflow-wrap: break-word; /* pour éviter que les mots trop longs débordent */
+    overflow-wrap: break-word; /* évite le dépassement des mots trop longs */
+    background-color: #1a1a1a; /* fond foncé (optionnel) */
 }
 
 #code .chercheur {
-    color: #de788b;            /* Ta couleur rose */
+    color: #de788b; /* rose */
     font-weight: bold;
 }
 
 #code .wrong-word {
-    color: #ff0000;            /* Rouge vif */
+    color: #ff0000; /* rouge vif */
     font-weight: bold;
 }
 
 #code p {
-  background-color: #2a2a2a;
-  padding: 12px 15px;
-  border-left: 4px solid #d32f2f;
-  border-radius: 6px;
-  margin-bottom: 12px;
-  color: #ddd;
-  transition: background 0.3s;
+    background-color: #2a2a2a;
+    padding: 12px 15px;
+    border-left: 4px solid #d32f2f;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    color: #ddd;
+    transition: background 0.3s;
 }
 
 .highlight {
-  color: #ff0000; /* Un orange vif, tu peux changer la couleur ici */
-  font-weight: bold;
+    color: #ff0000;
+    font-weight: bold;
 }
 
 .found-word {
-  color: #00cc66;  /* vert foncé, tu peux ajuster la teinte */
-  font-weight: bold;
+    color: #00cc66;
+    font-weight: bold;
 }
+
+/* Partie responsive */
+@media (max-width: 600px) {
+    #code {
+        padding: 15px 20px;
+        font-size: 16px;
+        width: 95%;
+    }
+
+    #code p {
+        padding: 10px 12px;
+        font-size: 15px;
+    }
+}
+
 
 
   </style>

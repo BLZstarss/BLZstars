@@ -452,6 +452,54 @@ section#discord {
   color: #fff;
 }
 
+
+#code {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #7f7f7f;
+    font-size: 18px;
+    line-height: 1.6;
+    padding: 25px 30px;
+    border-radius: 10px;
+    max-width: 800px;
+    min-height: 350px;
+    width: 85%;
+    margin: 30px auto;
+    text-align: left;
+    box-sizing: border-box;
+    overflow-wrap: break-word; /* pour éviter que les mots trop longs débordent */
+}
+
+#code .chercheur {
+    color: #de788b;            /* Ta couleur rose */
+    font-weight: bold;
+}
+
+#code .wrong-word {
+    color: #ff0000;            /* Rouge vif */
+    font-weight: bold;
+}
+
+#code p {
+  background-color: #2a2a2a;
+  padding: 12px 15px;
+  border-left: 4px solid #d32f2f;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  color: #ddd;
+  transition: background 0.3s;
+}
+
+.highlight {
+  color: #ff0000; /* Un orange vif, tu peux changer la couleur ici */
+  font-weight: bold;
+}
+
+.found-word {
+  color: #00cc66;  /* vert foncé, tu peux ajuster la teinte */
+  font-weight: bold;
+}
+
+
   </style>
 </head>
 <body>
@@ -462,6 +510,7 @@ section#discord {
   <button class="tab-button" data-target="discord">Discord</button>
   <button class="tab-button" data-target="bot">Bot</button> 
   <button class="tab-button" data-target="staff">Staff</button>
+  <button class="tab-button" data-target="code">code</button>
   
 </nav>
 
@@ -534,8 +583,10 @@ section#discord {
   <p><strong>Politique & Religions</strong><br />
   Parler de politique et religion est autorisé, mais <strong>aucune incitation</strong> n’est permise sous peine de <strong>1 jour d’exclusion</strong> (+1 avertissement).</p>
 
-  <p><strong>Troll</strong><br />
-  Le troll méchant et répétitif est interdit et peut entraîner <strong>1 jour d’exclusion</strong> (+1 avertissement).</p>
+ <p>
+  <strong class="highlight">Troll</strong><br />
+  Le <span class="highlight">troll</span> méchant et répétitif est interdit et peut entraîner <strong>1 jour d’exclusion</strong> (+1 avertissement).
+</p>
 
   <p><strong>Moqueries & Harcèlement</strong><br />
   Les moqueries peuvent entraîner <strong>1 jour d’exclusion</strong>, et un ban total si c’est répété (+1 avertissement).</p>
@@ -622,7 +673,39 @@ section#discord {
       </div>
     </div>
   </section>
-</main>
+
+  <!-- code -->
+  <section id="code" class="active">
+  <p>
+    Coucou ! En fait, le <strong>système de code</strong>, c’est un petit jeu sur le site.
+  </p>
+
+  <p>
+    Votre mission est de <strong>chercher un mot précis</strong> qui apparaîtra <span class="wrong-word">en rouge</span> quelque part sur le site.
+  </p>
+
+  <p>
+    Quand un mot est affiché <span class="found-word">en vert</span>, cela signifie qu’il a déjà été trouvé par quelqu’un d’autre.  
+    Par exemple : <span class="found-word">arbre</span> (trouvé).
+  </p>
+
+  <p>
+    Une fois que vous avez trouvé ce mot, rendez-vous sur notre serveur Discord et ouvrez un <strong>ticket</strong> via le système prévu à cet effet.
+  </p>
+
+  <p>
+    Si le code que vous avez trouvé est correct, vous recevrez automatiquement le rôle <span class="chercheur">chercheur</span>, qui vous donnera accès à des privilèges spéciaux.
+  </p>
+
+  <p>
+    <strong>Important :</strong> seuls deux codes seront publiés toutes les deux semaines, voire un mois.  
+    Alors soyez rapides et attentifs pour ne pas les manquer !
+  </p>
+
+  
+</section>
+
+
 
 <script>
   // === Onglets de navigation ===

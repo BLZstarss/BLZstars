@@ -519,26 +519,28 @@ section#discord {
   display: none; /* caché par défaut */
   flex-direction: column;
   justify-content: space-around;
-  width: 30px;
-  height: 24px;
+  width: 40px;        /* plus large */
+  height: 32px;       /* plus haut */
   background: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
   margin-right: 15px;
   z-index: 1001;
-  position: relative;
+  position: absolute; /* pour pouvoir le placer à droite */
+  top: 15px;          /* un peu en bas du haut */
+  right: 15px;        /* à droite */
 }
-
 #hamburger span {
-  width: 30px;
-  height: 3px;
-  background-color: #fff; /* adapte la couleur selon ton design */
+  width: 40px;       /* adapté à la largeur */
+  height: 4px;       /* un peu plus épais */
+  background-color: #fff;
   border-radius: 2px;
   transition: all 0.3s linear;
   position: relative;
   transform-origin: 1px;
 }
+
 
 /* Animation quand hamburger ouvert */
 #hamburger.open span:nth-child(1) {
@@ -573,18 +575,44 @@ section#discord {
   }
 
   /* Quand menu ouvert, afficher les boutons verticalement */
-  nav.open .tab-button {
-    display: block;
-    width: 100%;
-    padding: 15px 0;
-    background-color: #222; /* fond sombre */
-    color: white;
-    border: none;
-    text-align: center;
-    font-size: 1.2rem;
-    cursor: pointer;
-    border-bottom: 1px solid #444;
-  }
+  /* Quand menu ouvert, afficher les boutons verticalement avec couleurs jaune et rouge */
+nav.open .tab-button {
+  position: relative; /* important pour le ::after */
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  background-color: #222;
+  color: #FFD700;
+  border: none;
+  text-align: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(255, 69, 0, 0.6);
+  text-shadow: 1px 1px 2px #B8860B;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Suppression de border-bottom car on gère avec ::after */
+nav.open .tab-button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px; /* épaisseur de la séparation */
+  background-color: rgba;
+ box-shadow: 0 4px 6px rgba(255, 69, 0, 0.6);
+  pointer-events: none; /* pour que ça ne gêne pas le clic */
+}
+
+nav.open .tab-button:hover {
+  color: #FFFFE0;
+  box-shadow: 0 6px 8px rgba(255, 69, 0, 0.8);
+  text-shadow: 2px 2px 4px #FFFACD;
+}
+
+
+
 
   /* Conteneur nav en colonne quand ouvert */
   nav.open {

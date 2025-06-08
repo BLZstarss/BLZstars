@@ -514,6 +514,88 @@ section#discord {
     }
 }
 
+/* Hamburger styles */
+#hamburger {
+  display: none; /* caché par défaut */
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 15px;
+  z-index: 1001;
+  position: relative;
+}
+
+#hamburger span {
+  width: 30px;
+  height: 3px;
+  background-color: #fff; /* adapte la couleur selon ton design */
+  border-radius: 2px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+}
+
+/* Animation quand hamburger ouvert */
+#hamburger.open span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+#hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+#hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  nav {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  /* Cacher les boutons par défaut */
+  nav .tab-button {
+    display: none;
+  }
+
+  /* Afficher le hamburger */
+  #hamburger {
+    display: flex;
+  }
+
+  /* Quand menu ouvert, afficher les boutons verticalement */
+  nav.open .tab-button {
+    display: block;
+    width: 100%;
+    padding: 15px 0;
+    background-color: #222; /* fond sombre */
+    color: white;
+    border: none;
+    text-align: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-bottom: 1px solid #444;
+  }
+
+  /* Conteneur nav en colonne quand ouvert */
+  nav.open {
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #111; /* fond sombre total */
+    padding-top: 80px;
+    z-index: 1000;
+  }
+}
 
 
   </style>
@@ -521,14 +603,20 @@ section#discord {
 <body>
 
 <nav>
+  <button id="hamburger" aria-label="Ouvrir le menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  
   <button class="tab-button active" data-target="accueil">Accueil</button>
   <button class="tab-button" data-target="videos">Vidéos</button>
   <button class="tab-button" data-target="discord">Discord</button>
   <button class="tab-button" data-target="bot">Bot</button> 
   <button class="tab-button" data-target="staff">Staff</button>
   <button class="tab-button" data-target="code">code</button>
-  
 </nav>
+
 
 
 <main>
@@ -1224,7 +1312,23 @@ if (searchInput) {
     }
   });
 }
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.querySelector('nav');
 
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    nav.classList.toggle('open');
+  });
+
+  // Fermer le menu si on clique sur un bouton
+  document.querySelectorAll('nav .tab-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if(nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        hamburger.classList.remove('open');
+      }
+    });
+  });
 // Afficher toutes les vidéos au chargement
 displayVideos(videos);
 

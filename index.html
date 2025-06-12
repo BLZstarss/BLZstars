@@ -685,7 +685,7 @@ nav.open .tab-button:hover {
     width: 300px;
     height: 100%;
     background: #111;
-    color: white;
+    color: rgb(245, 0, 163);
     padding: 20px;
     box-shadow: -2px 0 8px rgba(0,0,0,0.6);
     transition: right 0.3s ease;
@@ -1512,7 +1512,7 @@ if (searchInput) {
 // Afficher toutes les vidéos au chargement
 displayVideos(videos);
 
-   const customizerPanel = document.getElementById('customizerPanel');
+  const customizerPanel = document.getElementById('customizerPanel');
 
 function toggleCustomizer() {
   customizerPanel.classList.toggle('open');
@@ -1523,39 +1523,46 @@ const elementsToStyle = {
   text: () => document.querySelectorAll('body *:not(script):not(style):not(.code-text):not(.role-fixed)')
 };
 
-function applyTheme(theme) {
-  const themes = {
-    dark: { font: "Verdana", textColor: "#ffffff", buttonColor: "#444444", bgColor: "#111111" },
-    light: { font: "Arial", textColor: "#000000", buttonColor: "#dddddd", bgColor: "#ffffff" },
-    red: { font: "'Courier New'", textColor: "#ffdddd", buttonColor: "#660000", bgColor: "#220000" },
-    blue: { font: "'Times New Roman'", textColor: "#ddeeff", buttonColor: "#003366", bgColor: "#001122" },
-    blzstars: { font: "Arial", textColor: "#ffffff", buttonColor: "#0077ff", bgColor: "#0a0a0a" },
-    ocean: { font: "'Trebuchet MS'", textColor: "#e0ffff", buttonColor: "#007f9a", bgColor: "#002f4b" },
-    espace: { font: "'Orbitron'", textColor: "#cfcfff", buttonColor: "#333366", bgColor: "#000010" },
-    feu: { font: "'Impact'", textColor: "#ffccaa", buttonColor: "#cc3300", bgColor: "#330000" },
-    neige: { font: "'Segoe UI'", textColor: "#003366", buttonColor: "#cceeff", bgColor: "#ffffff" },
-    cyberpunk: { font: "'Lucida Console'", textColor: "#39ff14", buttonColor: "#ff00ff", bgColor: "#000000" },
-    japonais: { font: "'Noto Sans JP'", textColor: "#1f1f1f", buttonColor: "#ffcccc", bgColor: "#fff0f0" },
-    retro: { font: "'Courier New'", textColor: "#00ff00", buttonColor: "#000000", bgColor: "#111111" },
-    spacegray: { font: "'Helvetica Neue'", textColor: "#dddddd", buttonColor: "#444", bgColor: "#222" },
-    sakura: { font: "'Comic Sans MS'", textColor: "#d63384", buttonColor: "#ffc0cb", bgColor: "#fff0f5" },
-    toxic: { font: "'Consolas'", textColor: "#ccff00", buttonColor: "#333300", bgColor: "#111100" },
-    sunset: { font: "'Georgia'", textColor: "#ffcc99", buttonColor: "#ff9966", bgColor: "#330000" },
-    hacker: { font: "'Courier New'", textColor: "#00ff00", buttonColor: "#003300", bgColor: "#000000" },
-    forest: { font: "'Garamond'", textColor: "#e6ffe6", buttonColor: "#336633", bgColor: "#001a00" },
-    neon: { font: "'Arial Black'", textColor: "#ffffff", buttonColor: "#00ffff", bgColor: "#1a1a1a" },
-    candy: { font: "'Comic Sans MS'", textColor: "#ff66cc", buttonColor: "#ffccff", bgColor: "#ffe6f2" }
-  };
+const themes = {
+  dark: { font: "Verdana", textColor: "#ffffff", buttonColor: "#444444", bgColor: "#111111" },
+  light: { font: "Arial", textColor: "#000000", buttonColor: "#dddddd", bgColor: "#ffffff" },
+  red: { font: "'Courier New'", textColor: "#ffdddd", buttonColor: "#660000", bgColor: "#220000" },
+  blue: { font: "'Times New Roman'", textColor: "#ddeeff", buttonColor: "#003366", bgColor: "#001122" },
+  blzstars: { font: "Arial", textColor: "#ffffff", buttonColor: "#0077ff", bgColor: "#0a0a0a" },
+  ocean: { font: "'Trebuchet MS'", textColor: "#e0ffff", buttonColor: "#007f9a", bgColor: "#002f4b" },
+  espace: { font: "'Orbitron'", textColor: "#cfcfff", buttonColor: "#333366", bgColor: "#000010" },
+  feu: { font: "'Impact'", textColor: "#ffccaa", buttonColor: "#cc3300", bgColor: "#330000" },
+  neige: { font: "'Segoe UI'", textColor: "#003366", buttonColor: "#cceeff", bgColor: "#ffffff" },
+  cyberpunk: { font: "'Lucida Console'", textColor: "#39ff14", buttonColor: "#ff00ff", bgColor: "#000000" },
+  japonais: { font: "'Noto Sans JP'", textColor: "#1f1f1f", buttonColor: "#ffcccc", bgColor: "#fff0f0" },
+  retro: { font: "'Courier New'", textColor: "#00ff00", buttonColor: "#000000", bgColor: "#111111" },
+  spacegray: { font: "'Helvetica Neue'", textColor: "#dddddd", buttonColor: "#444", bgColor: "#222" },
+  sakura: { font: "'Comic Sans MS'", textColor: "#d63384", buttonColor: "#ffc0cb", bgColor: "#fff0f5" },
+  toxic: { font: "'Consolas'", textColor: "#ccff00", buttonColor: "#333300", bgColor: "#111100" },
+  sunset: { font: "'Georgia'", textColor: "#ffcc99", buttonColor: "#ff9966", bgColor: "#330000" },
+  hacker: { font: "'Courier New'", textColor: "#00ff00", buttonColor: "#003300", bgColor: "#000000" },
+  forest: { font: "'Garamond'", textColor: "#e6ffe6", buttonColor: "#336633", bgColor: "#001a00" },
+  neon: { font: "'Arial Black'", textColor: "#ffffff", buttonColor: "#00ffff", bgColor: "#1a1a1a" },
+  candy: { font: "'Comic Sans MS'", textColor: "#ff66cc", buttonColor: "#ffccff", bgColor: "#ffe6f2" }
+};
 
-  const t = themes[theme];
-  if (!t) return;
+function applyTheme(themeName) {
+  const theme = themes[themeName];
+  if (!theme) return;
 
-  document.getElementById('fontSelect').value = t.font;
-  document.getElementById('textColorPicker').value = t.textColor;
-  document.getElementById('buttonColorPicker').value = t.buttonColor;
-  document.getElementById('bgColorPicker').value = t.bgColor;
+  // Mettre à jour les valeurs dans les inputs
+  document.getElementById('fontSelect').value = theme.font;
+  document.getElementById('textColorPicker').value = theme.textColor;
+  document.getElementById('buttonColorPicker').value = theme.buttonColor;
+  document.getElementById('bgColorPicker').value = theme.bgColor;
 
-  applyCustomization(); // applique directement les couleurs
+  // Mettre à jour le style du select
+  const selector = document.getElementById("themeSelector");
+  selector.style.color = theme.textColor;
+  selector.style.backgroundColor = theme.buttonColor;
+  selector.style.border = `1px solid ${theme.textColor}`;
+
+  applyCustomization(); // Appliquer les styles directement
 }
 
 function applyCustomization(save = true) {
@@ -1565,13 +1572,11 @@ function applyCustomization(save = true) {
   const bgColor = document.getElementById('bgColorPicker').value;
   const borderRadius = document.getElementById('radiusPicker').value;
 
-  // Texte global
   elementsToStyle.text().forEach(el => {
     el.style.fontFamily = font;
     el.style.color = textColor;
   });
 
-  // Boutons
   elementsToStyle.buttons().forEach(el => {
     el.style.backgroundColor = buttonColor;
     el.style.color = textColor;
@@ -1580,7 +1585,6 @@ function applyCustomization(save = true) {
     el.style.boxShadow = "0 0 10px rgba(0,0,0,0.5)";
   });
 
-  // Fond du site
   document.body.style.backgroundColor = bgColor;
 
   if (save) {
@@ -1616,6 +1620,8 @@ document.getElementById('themeSelect').addEventListener('change', (e) => {
 window.addEventListener('load', () => {
   loadSavedCustomization();
 });
+
+
 
 
 

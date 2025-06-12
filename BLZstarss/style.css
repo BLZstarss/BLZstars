@@ -1,0 +1,872 @@
+ *, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #121212;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+:root {
+  --role-chef: #b10000;
+  --role-sous-chef: #0cb254;
+  --role-admin: #47b2ff;
+  --role-supermodo: #087fff;
+  --role-modo: #004ae9;
+
+  --word-found: #0cb254;
+  --word-wrong: #b10000;
+  --role-fixed: #ffb700;
+}
+
+body.light {
+  --role-chef: #d00000;
+  --role-sous-chef: #108c4a;
+  --role-admin: #0066cc;
+  --role-supermodo: #0055aa;
+  --role-modo: #0033aa;
+
+  --word-found: #108c4a;
+  --word-wrong: #d00000;
+  --role-fixed: #d68d00;
+}
+
+body.dark {
+  --role-chef: #ff4c4c;
+  --role-sous-chef: #2aff80;
+  --role-admin: #47b2ff;
+  --role-supermodo: #2f9bff;
+  --role-modo: #3a6fff;
+
+  --word-found: #2aff80;
+  --word-wrong: #ff4c4c;
+  --role-fixed: #ffd36b;
+}
+
+
+/* Appliquer le même style que #discord à #accueil */
+/* Appliquer le même style que #discord à #accueil */
+#accueil {
+  line-height: 1.6;
+  font-size: 1rem;
+  background-color: #2a2a2a;
+  padding: 12px 15px;
+  
+  border-radius: 6px;
+  color: #ddd;
+  margin-bottom: 12px;
+  transition: background 0.3s;
+  box-shadow: 0 2px 10px rgb(211 47 47 / 0.15);
+}
+
+#accueil h1 {
+  font-size: 1.6rem;
+  color: #ffc107;
+  margin-bottom: 15px;
+  text-align: center;
+  text-shadow: 0 0 8px #d32f2f66;
+}
+
+#accueil p {
+  background-color: #2a2a2a;
+  padding: 12px 15px;
+  border-left: 4px solid #d32f2f;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  color: #ddd;
+  transition: background 0.3s;
+}
+
+#accueil p strong {
+  color: #ffc107;
+}
+
+#accueil p:hover {
+  background-color: #333;
+}
+
+
+
+
+header {
+  background: #1b1b1b;
+  color: #d32f2f;
+  padding: 20px 0;
+  font-size: 2rem;
+  text-align: center;
+  border-bottom: 3px solid #d32f2f;
+  width: 100%;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  background: #1b1b1b;
+  width: 100%;
+  max-width: 600px;
+  border-bottom: 2px solid #d32f2f;
+  padding: 5px 0;
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.2);
+  position: relative;
+  z-index: 1000;
+}
+
+nav button {
+  flex: 1;
+  max-width: 200px;
+  background: transparent;
+  border: none;
+  padding: 15px 0;
+  color: #ddd;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+nav button::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: #ffc107;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+nav button:hover {
+  color: #ffc107;
+  text-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
+  transform: translateY(-1px);
+}
+
+nav button:hover::before {
+  width: 80%;
+}
+
+nav button.active {
+  color: #ffc107;
+  text-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
+  font-weight: 800;
+}
+
+nav button.active::before {
+  width: 100%;
+  background: #ffc107;
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
+/* Style pour le bouton de personnalisation */
+nav button:last-child {
+  background: linear-gradient(45deg, #d32f2f, #ffc107);
+  color: white;
+  border-radius: 6px;
+  margin: 5px 10px;
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 2px 8px rgba(211, 47, 47, 0.3);
+  text-transform: none;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+nav button:last-child:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+nav button:last-child::before {
+  display: none;
+}
+
+/* Amélioration du style mobile */
+@media (max-width: 768px) {
+  nav {
+    padding: 0;
+  }
+
+  nav button {
+    padding: 12px 0;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+  }
+
+  nav button:last-child {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+main {
+  max-width: 600px;
+  width: 95%;
+  background: #1e1e1e;
+  border-radius: 12px;
+  padding: 25px 30px;
+  margin: 30px auto;
+  box-shadow: 0 10px 25px rgb(211 47 47 / 0.4);
+}
+
+h1, h2 {
+  text-align: center;
+  text-shadow: 0 0 5px #d32f2f99;
+}
+
+h1 {
+  font-size: 1.5rem;
+  color: #ffc107;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #d32f2f;
+  margin-bottom: 25px;
+}
+
+section {
+  display: none;
+}
+
+#bot-search {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  background-color: #292929;
+  color: #ffc107;
+  box-shadow: inset 0 0 5px #ffc107aa;
+  outline: none;
+}
+
+#bot-search::placeholder {
+  color: #ffc107aa;
+}
+
+section.active {
+  display: block;
+}
+
+.staff-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+.staff-member {
+  flex: 0 0 calc(50% - 5px);
+  background: #292929;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 2px 10px rgb(211 47 47 / 0.15);
+  user-select: none;
+  overflow: hidden;
+  height: 50px;
+}
+
+.staff-name, .staff-role {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  background-color: #292929;
+  box-sizing: border-box;
+  padding: 14px 18px;
+}
+
+.staff-name {
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 2;
+  text-shadow: 0 0 8px rgba(255, 193, 7, 0.3);
+}
+
+.staff-role {
+  opacity: 0;
+  transform: translateY(100%);
+  z-index: 1;
+}
+
+.staff-member.active .staff-name {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.staff-member.active .staff-role {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Couleurs des pseudos et rôles */
+.staff-member[data-role="Chef"] .staff-name,
+.staff-member[data-role="Chef"] .staff-role { 
+  color: var(--role-chef);
+  text-shadow: 0 0 8px rgba(177, 0, 0, 0.3);
+}
+
+.staff-member[data-role="Sous chef"] .staff-name,
+.staff-member[data-role="Sous chef"] .staff-role { 
+  color: var(--role-sous-chef);
+  text-shadow: 0 0 8px rgba(12, 178, 84, 0.3);
+}
+
+.staff-member[data-role="Administrateur"] .staff-name,
+.staff-member[data-role="Administrateur"] .staff-role { 
+  color: var(--role-admin);
+  text-shadow: 0 0 8px rgba(71, 178, 255, 0.3);
+}
+
+.staff-member[data-role="Super Modérateur"] .staff-name,
+.staff-member[data-role="Super Modérateur"] .staff-role { 
+  color: var(--role-supermodo);
+  text-shadow: 0 0 8px rgba(8, 127, 255, 0.3);
+}
+
+.staff-member[data-role="Modérateur"] .staff-name,
+.staff-member[data-role="Modérateur"] .staff-role { 
+  color: var(--role-modo);
+  text-shadow: 0 0 8px rgba(0, 74, 233, 0.3);
+}
+
+.staff-member:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgb(211 47 47 / 0.25);
+}
+
+.staff-member:hover .staff-name {
+  filter: brightness(1.2);
+  text-shadow: 0 0 12px currentColor;
+}
+
+.found-word {
+  color: var(--word-found);
+  font-weight: bold;
+}
+
+.wrong-word {
+  color: var(--word-wrong);
+  font-weight: bold;
+}
+
+.role-fixed {
+  color: var(--role-fixed);
+  font-weight: bold;
+}
+
+/* Règlement Discord */
+section#discord {
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+#discord h1 {
+  font-size: 1.6rem;
+  color: #ffc107;
+  margin-bottom: 15px;
+  text-align: center;
+  text-shadow: 0 0 8px #d32f2f66;
+}
+
+#discord p {
+  background-color: #2a2a2a;
+  padding: 12px 15px;
+  border-left: 4px solid #d32f2f;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  color: #ddd;
+  transition: background 0.3s;
+}
+
+#discord p strong {
+  color: #ffc107;
+}
+
+#discord p:hover {
+  background-color: #333;
+}
+
+/* Vidéos */
+.video-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #2b2b2b;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.video-item:hover {
+  background-color: #353535;
+}
+
+.video-title {
+  cursor: pointer;
+  color: #ffc107; /* jaune comme le site */
+  font-size: 1.3rem;
+  margin: 0;
+  transition: color 0.3s;
+  font-weight: 700;
+  text-shadow: 0 0 4px #dcae00;
+  user-select: none;
+}
+
+.video-title:hover {
+  color: #ffca28;
+}
+
+.video-meta {
+  font-size: 0.9rem;
+  color: #999;
+  margin-top: 5px;
+}
+
+.video-summary {
+  margin-top: 10px;
+  padding: 12px 16px;
+  background-color: #1e1e1e;
+  border-left: 4px solid #ffc107; /* trait jaune */
+  color: #7f7f7f; /* gris qui jure un peu */
+  font-size: 0.95rem;
+  border-radius: 6px;
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 500;
+  user-select: text;
+}
+
+.video-item.active .video-summary {
+  display: block;
+}
+
+#accept-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #d32f2f;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#accept-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Animation fadeIn */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pour les écrans plus larges que 768px (tablettes/PC) */
+@media (min-width: 768px) {
+  main {
+    max-width: 900px;  /* plus large que sur mobile */
+    width: 90%;
+    padding: 40px 50px;
+  }
+
+  nav {
+    max-width: 900px;
+  }
+
+  nav button {
+    max-width: none;
+    font-size: 1.2rem;
+  }
+
+  .staff-container {
+    justify-content: center;
+  }
+
+  .staff-member {
+    flex: 0 0 calc(33.333% - 7px);
+  }
+
+  /* Par exemple, agrandir un peu les titres */
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 2.8rem;
+  }
+}
+
+/* Barre de recherche */
+#video-search {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  background-color: #292929;
+  color: #ffc107;
+  box-shadow: inset 0 0 5px #ffc107aa;
+  outline: none;
+}
+
+#video-search::placeholder {
+  color: #ffc107aa;
+}
+
+/* Commandes Bot - même style que vidéos */
+.bot-command {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #2b2b2b;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.bot-command:hover {
+  background-color: #353535;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.bot-title {
+  cursor: pointer;
+  color: #ffc107;
+  font-size: 1.3rem;
+  margin: 0;
+  transition: all 0.3s ease;
+  font-weight: 700;
+  text-shadow: 0 0 4px #dcae00;
+  user-select: none;
+  position: relative;
+  padding-right: 25px;
+}
+
+.bot-title::after {
+  content: '▼';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8em;
+  transition: transform 0.3s ease;
+}
+
+.bot-command.active .bot-title::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.bot-description {
+  margin-top: 10px;
+  padding: 0;
+  background-color: #1e1e1e;
+  border-left: 4px solid #ffc107;
+  color: #7f7f7f;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-10px);
+}
+
+.bot-description.active {
+  max-height: 200px;
+  opacity: 1;
+  padding: 12px 16px;
+  transform: translateY(0);
+  margin-top: 15px;
+}
+
+.bot-command.active .bot-title {
+  color: #ffd700;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+/* Suggestions sous la barre */
+#suggestions {
+  background: #2b2b2b;
+  border-radius: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+
+.suggestion-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  color: #ffc107;
+  font-weight: 600;
+  border-bottom: 1px solid #444;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.suggestion-item:hover {
+  background-color: #353535;
+}
+
+.no-suggestion {
+  padding: 10px 14px;
+  color: #999;
+  font-style: italic;
+}
+
+/* Style personnalisé pour la barre de recherche bot quand active */
+#bot-search:focus {
+  box-shadow: 0 0 8px #ffc107bb;
+  background-color: #353535;
+  color: #fff;
+}
+
+
+#code {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #7f7f7f;
+    font-size: 18px;
+    line-height: 1.6;
+    padding: 25px 30px;
+    border-radius: 10px;
+    max-width: 800px;
+    min-height: 350px;
+    width: 85%;
+    margin: 30px auto;
+    text-align: left;
+    box-sizing: border-box;
+    overflow-wrap: break-word; /* évite le dépassement des mots trop longs */
+    background-color: #1a1a1a; /* fond foncé (optionnel) */
+}
+
+#code .chercheur {
+    color: #de788b; /* rose */
+    font-weight: bold;
+}
+
+#code .wrong-word {
+    color: #ff0000; /* rouge vif */
+    font-weight: bold;
+}
+
+#code p {
+    background-color: #2a2a2a;
+    padding: 12px 15px;
+    border-left: 4px solid #d32f2f;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    color: #ddd;
+    transition: background 0.3s;
+}
+
+.highlight {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.found-word {
+    color: #00cc66;
+    font-weight: bold;
+}
+
+/* Partie responsive */
+@media (max-width: 600px) {
+    #code {
+        padding: 15px 20px;
+        font-size: 16px;
+        width: 95%;
+    }
+
+    #code p {
+        padding: 10px 12px;
+        font-size: 15px;
+    }
+}
+
+/* Hamburger styles */
+#hamburger {
+  display: none; /* caché par défaut */
+  flex-direction: column;
+  justify-content: space-around;
+  width: 40px;        /* plus large */
+  height: 32px;       /* plus haut */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 15px;
+  z-index: 1001;
+  position: absolute; /* pour pouvoir le placer à droite */
+  top: 15px;          /* un peu en bas du haut */
+  right: 15px;        /* à droite */
+}
+#hamburger span {
+  width: 40px;       /* adapté à la largeur */
+  height: 4px;       /* un peu plus épais */
+  background-color: #fff;
+  border-radius: 2px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+}
+
+
+/* Animation quand hamburger ouvert */
+#hamburger.open span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+#hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+#hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  nav {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  /* Cacher les boutons par défaut */
+  nav .tab-button {
+    display: none;
+  }
+
+  /* Afficher le hamburger */
+  #hamburger {
+    display: flex;
+  }
+
+  /* Quand menu ouvert, afficher les boutons verticalement */
+  /* Quand menu ouvert, afficher les boutons verticalement avec couleurs jaune et rouge */
+nav.open .tab-button {
+  position: relative; /* important pour le ::after */
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  background-color: #222;
+  color: #FFD700;
+  border: none;
+  text-align: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(255, 69, 0, 0.6);
+  text-shadow: 1px 1px 2px #B8860B;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Suppression de border-bottom car on gère avec ::after */
+nav.open .tab-button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px; /* épaisseur de la séparation */
+  background-color: rgba;
+ box-shadow: 0 4px 6px rgba(255, 69, 0, 0.6);
+  pointer-events: none; /* pour que ça ne gêne pas le clic */
+}
+
+nav.open .tab-button:hover {
+  color: #FFFFE0;
+  box-shadow: 0 6px 8px rgba(255, 69, 0, 0.8);
+  text-shadow: 2px 2px 4px #FFFACD;
+}
+
+
+
+
+  /* Conteneur nav en colonne quand ouvert */
+  nav.open {
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #111; /* fond sombre total */
+    padding-top: 80px;
+    z-index: 1000;
+  }
+}
+
+
+.customizer-panel {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background: #111;
+    color: rgb(245, 0, 163);
+    padding: 20px;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.6);
+    transition: right 0.3s ease;
+    z-index: 9999;
+    overflow-y: auto;
+  }
+
+  .customizer-panel.open {
+    right: 0;
+  }
+
+  .customizer-panel h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .customizer-panel label {
+    display: block;
+    margin: 10px 0 5px;
+  }
+
+  .customizer-panel input,
+  .customizer-panel select,
+  .customizer-panel button {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }

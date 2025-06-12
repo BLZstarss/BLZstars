@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BLZstarss</title>
+  <link rel="icon" href="channels4_profile.jpg" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <button id="hamburger" aria-label="Ouvrir le menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  
+  <button class="tab-button active" data-target="accueil">Accueil</button>
+  <button class="tab-button" data-target="videos">Vidéos</button>
+  <button class="tab-button" data-target="discord">Discord</button>
+  <button class="tab-button" data-target="bot">Bot</button> 
+  <button class="tab-button" data-target="staff">Staff</button>
+  <button class="tab-button" data-target="code">code</button>
+  <button onclick="toggleCustomizer()">Personnaliser</button>
+
+</nav>
+
+
+
+<main>
+  <!-- Accueil -->
+  <section id="accueil" class="active">
+
+  <div class="accueil-paragraphe">
+    <p>Bienvenue sur <strong>BLZstarss</strong>, votre plateforme incontournable pour suivre l'actualité et découvrir les dernières vidéos exclusives de notre serveur. Ici, la communauté est au cœur de tout : respect, entraide et bonne humeur.</p>
+
+    <p>Que vous soyez nouveau ou membre fidèle, vous trouverez ici un contenu riche et varié : divertissement, informations, analyses, critiques… tout est pensé pour vous offrir une expérience complète et agréable.</p>
+
+    <p>Explorez librement nos différentes rubriques : <strong>vidéos populaires</strong>, <strong>règlement du serveur Discord</strong>, et <strong>présentation de l'équipe</strong> – chaque section a été conçue pour vous informer et vous intégrer pleinement.</p>
+
+    <p>Nous construisons ensemble une communauté forte, unie autour de valeurs simples : respect, partage et passion. N'hésitez pas à participer, poser vos questions ou proposer vos idées !</p>
+
+    <p class="merci">Merci d'être avec nous. Bonne visite sur <strong>BLZstarss</strong> !</p>
+  </div>
+</section>
+
+
+  <!-- Vidéos -->
+  <section id="videos">
+    <input type="search" id="video-search" placeholder="Rechercher une vidéo..." autocomplete="off" />
+    <div id="suggestions"></div>
+    <div id="videos-container"></div>
+  </section>
+
+  <!-- Discord -->
+  <section id="discord">
+    <p><strong>Acceptez le règlement de BLZstarss pour accéder à l'intégralité du serveur</strong></p>
+
+  <p><strong>Système d'avertissements</strong><br />
+  Quand vous recevez une sanction ou que vous avez fait quelque chose de pas très grave, vous recevez un <strong>warn</strong>. Tous les <strong>5 warns</strong>, vous prenez <strong>1 jour d'exclusion</strong>. Si votre nombre de warns devient trop élevé, le staff peut envisager de vous <strong>bannir</strong>.</p>
+
+  <p><strong>Attention</strong><br />
+  Un staff peut vous sanctionner pour quelque chose qui n'est <strong>pas dans le règlement</strong>, mais qui paraît évident (ex : parler de cannibalisme, de camps de concentration, etc.).</p>
+
+  <p><strong>Attention 2</strong><br />
+  Si vous <strong>n'avez pas accepté ce règlement</strong>, la sanction est <strong>doublée</strong>.</p>
+
+  <p><strong>Insultes</strong><br />
+  Les insultes sont plus ou moins interdites selon leur gravité :<br />
+  - « pu!ain de merde » ne sera pas sanctionné<br />
+  - « va te faire v!oler sale encu!er » sera sanctionné<br />
+  Les sanctions vont de <strong>1 heure à 1 semaine</strong> (+1 avertissement).</p>
+
+  <p><strong>Publicité</strong><br />
+  La publicité hors du salon dédié est punie d'un avertissement, et d'<strong>1 heure d'exclusion</strong> si c'est en message privé (+1 avertissement).</p>
+
+  <p><strong>Contenu Sexuel</strong><br />
+  Tout contenu à référence sexuelle est puni :<br />
+  - <strong>1 heure d'exclusion</strong> pour les cas moins graves (parler de parties génitales)<br />
+  - <strong>Ban définitif</strong> pour les plus graves (vidéos).</p>
+
+  <p><strong>Profils</strong><br />
+  Les profils doivent être respectueux :<br />
+  - Les insultes légères sont tolérées<br />
+  - Le sexe, le gore, et les références aux époques sombres de l'histoire (sauf blagues simples) sont interdits<br />
+  Refuser de changer un profil interdit peut entraîner un <strong>ban</strong>.</p>
+
+  <p><strong>Contenu Violent</strong><br />
+  - Les vidéos gores ou avec du sang sont <strong>interdites</strong> et entraînent un <strong>ban</strong>.<br />
+  - Pour les dessins, le sang est autorisé, mais les dessins trop violents peuvent causer <strong>1 jour d'exclusion</strong> (+1 avertissement).</p>
+
+  <p><strong>Spam</strong><br />
+  Le spam est interdit et peut valoir un avertissement.</p>
+
+  <p><strong>Politique & Religions</strong><br />
+  Parler de politique et religion est autorisé, mais <strong>aucune incitation</strong> n'est permise sous peine de <strong>1 jour d'exclusion</strong> (+1 avertissement).</p>
+
+ <p>
+  <strong class="highlight">Troll</strong><br />
+  Le troll méchant et répétitif est interdit et peut entraîner <strong>1 jour d'exclusion</strong> (+1 avertissement).
+</p>
+
+  <p><strong>Moqueries & Harcèlement</strong><br />
+  Les moqueries peuvent entraîner <strong>1 jour d'exclusion</strong>, et un ban total si c'est répété (+1 avertissement).</p>
+
+  <p><strong>Discrimination</strong><br />
+  La discrimination est interdite et sanctionnée par <strong>1 semaine d'exclusion à un ban définitif</strong>.</p>
+
+  <p><strong>Humour noir</strong><br />
+  L'humour noir est autorisé mais à ne pas abuser, sinon vous risquez <strong>1 avertissement</strong>.</p>
+
+  <p><strong>Parler de sombres époques</strong><br />
+  Interdit, avec jusqu'à <strong>1 semaine d'exclusion</strong> et ban définitif si vous souhaitez leur retour.</p>
+
+  <p><strong>Usurpation d'identité</strong><br />
+  Interdite, entraîne <strong>1 jour d'exclusion</strong>, puis <strong>1 semaine</strong>, puis ban si récidive.</p>
+
+  <p><strong>Les mentions</strong><br />
+  Mentionner un modo ou BLZ est autorisé, mais en cas d'abus, sanction de <strong>1 heure d'exclusion</strong> et <strong>1 avertissement</strong>.</p>
+
+  <p><strong>Divulgation</strong><br />
+  La divulgation d'informations personnelles non consenties entraîne un <strong>ban</strong>.</p>
+
+  <p><strong>Spoil</strong><br />
+  Le spoil est interdit et puni d'un avertissement.</p>
+    <button id="accept-button">Accepter le règlement</button>
+  </section>
+
+  <!-- bot -->
+
+  <section id="bot">
+  <input type="text" id="bot-search" placeholder="Rechercher une commande...">
+  <div id="bot-suggestions"></div>
+  <div id="bot-container"></div>
+</section>
+
+
+
+  <!-- Staff -->
+  <section id="staff">
+    <div class="staff-container">
+      <div class="staff-container">
+        <div class="staff-member" data-role="Chef">
+          <div class="staff-name">👑 BLZstarss</div>
+          <div class="staff-role">Rôle : Chef</div>
+        </div>
+        <div class="staff-member" data-role="Sous chef">
+          <div class="staff-name">🥈 Aviator_man</div>
+          <div class="staff-role">Rôle : Sous-chef</div>
+        </div>
+        <div class="staff-member" data-role="Administrateur">
+          <div class="staff-name">🛠️ Narakys</div>
+          <div class="staff-role">Rôle : Administrateur</div>
+        </div>
+        <div class="staff-member" data-role="Administrateur">
+          <div class="staff-name">🛠️ Lapai</div>
+          <div class="staff-role">Rôle : Administrateur</div>
+        </div>
+        <div class="staff-member" data-role="Administrateur">
+          <div class="staff-name">🛠️ Zibul</div>
+          <div class="staff-role">Rôle : Administrateur</div>
+        </div>
+        <div class="staff-member" data-role="Super Modérateur">
+          <div class="staff-name">⭐ Abder</div>
+          <div class="staff-role">Rôle : Super Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Super Modérateur">
+          <div class="staff-name">⭐ Vore</div>
+          <div class="staff-role">Rôle : Super Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Super Modérateur">
+          <div class="staff-name">⭐ Rosalune</div>
+          <div class="staff-role">Rôle : Super Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">
+          <div class="staff-name">🔨 Tosco</div>
+          <div class="staff-role">Rôle : Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">
+          <div class="staff-name">🔨 Nocturno</div>
+          <div class="staff-role">Rôle : Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">
+          <div class="staff-name">🔨 Gabz</div>
+          <div class="staff-role">Rôle : Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">
+          <div class="staff-name">🔨 Koyorin</div>
+          <div class="staff-role">Rôle : Modérateur</div>
+        </div>
+        <div class="staff-member" data-role="Modérateur">
+          <div class="staff-name">🔨 Lanful</div>
+          <div class="staff-role">Rôle : Modérateur</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- code -->
+  <section id="code" class="active">
+  <p>
+    Coucou ! En fait, le <strong>système de code</strong>, c'est un petit jeu sur le site.
+  </p>
+
+  <p>
+    Votre mission est de <strong>chercher un mot précis</strong> qui apparaîtra <span class="wrong-word">en rouge</span> quelque part sur le site.
+  </p>
+
+  <p>
+    Quand un mot est affiché <span class="found-word">en vert</span>, cela signifie qu'il a déjà été trouvé par quelqu'un d'autre.  
+    Par exemple : <span class="code-text">arbre</span> (trouvé).
+  </p>
+
+  <p>
+    Une fois que vous avez trouvé ce mot, rendez-vous sur notre serveur Discord et ouvrez un <strong>ticket</strong> disponible sur le serveur.
+  </p>
+
+  <p>
+    Si le code que vous avez trouvé est correct, vous recevrez le rôle <span class="role-fixed">Chercheur</span>.
+  </p>
+
+  <p>
+    <strong>Important :</strong> seuls deux codes seront publiés toutes les deux semaines, voire un mois.  
+    Alors soyez rapides et attentifs pour ne pas les manquer !
+  </p>
+
+ <!-- Panneau de personnalisation -->
+<div class="customizer-panel" id="customizerPanel">
+  <h2>🎨 Personnaliser le site</h2>
+
+  <label>Police du texte</label>
+  <select id="fontSelect">
+    <option value="Arial">Arial</option>
+    <option value="Verdana">Verdana</option>
+    <option value="'Courier New'">Courier New</option>
+    <option value="'Times New Roman'">Times New Roman</option>
+    <option value="'Trebuchet MS'">Trebuchet MS</option>
+    <option value="'Orbitron'">Orbitron</option>
+    <option value="'Comic Sans MS'">Comic Sans MS</option>
+    <option value="'Lucida Console'">Lucida Console</option>
+    <option value="'Noto Sans JP'">Noto Sans JP</option>
+    <option value="'Georgia'">Georgia</option>
+  </select>
+
+  <label>Couleur du texte</label>
+  <input type="color" id="textColorPicker">
+
+  <label>Couleur des boutons</label>
+  <input type="color" id="buttonColorPicker">
+
+  <label>Couleur de fond</label>
+  <input type="color" id="bgColorPicker">
+
+  <label>Rayon des coins (boutons)</label>
+  <input type="range" id="radiusPicker" min="0" max="30" value="10">
+
+  <label>Thème prédéfini</label>
+  <select id="themeSelect">
+    <option value="">-- Aucun --</option>
+    <option value="dark">Sombre</option>
+    <option value="light">Clair</option>
+    <option value="red">Rouge / Noir</option>
+    <option value="blue">Bleu / Blanc</option>
+    <option value="blzstars">BLZstars</option>
+    <option value="ocean">Océan</option>
+    <option value="espace">Espace</option>
+    <option value="feu">Feu</option>
+    <option value="neige">Neige</option>
+    <option value="cyberpunk">Cyberpunk</option>
+    <option value="japonais">Japonais</option>
+    <option value="retro">Rétro</option>
+    <option value="spacegray">Gris spatial</option>
+    <option value="sakura">Sakura</option>
+    <option value="toxic">Toxique</option>
+    <option value="sunset">Coucher de soleil</option>
+    <option value="hacker">Hacker</option>
+    <option value="forest">Forêt</option>
+    <option value="neon">Néon</option>
+    <option value="candy">Bonbon</option>
+  </select>
+
+  <button onclick="applyCustomization()">✅ Appliquer</button>
+  <button onclick="resetCustomization()">♻️ Réinitialiser</button>
+</div>
+
+
+  
+</section>
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+</html>

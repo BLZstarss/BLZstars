@@ -18,6 +18,43 @@ body {
   align-items: center;
 }
 
+:root {
+  --role-chef: #b10000;
+  --role-sous-chef: #0cb254;
+  --role-admin: #47b2ff;
+  --role-supermodo: #087fff;
+  --role-modo: #004ae9;
+
+  --word-found: #0cb254;
+  --word-wrong: #b10000;
+  --role-fixed: #ffb700;
+}
+
+body.light {
+  --role-chef: #d00000;
+  --role-sous-chef: #108c4a;
+  --role-admin: #0066cc;
+  --role-supermodo: #0055aa;
+  --role-modo: #0033aa;
+
+  --word-found: #108c4a;
+  --word-wrong: #d00000;
+  --role-fixed: #d68d00;
+}
+
+body.dark {
+  --role-chef: #ff4c4c;
+  --role-sous-chef: #2aff80;
+  --role-admin: #47b2ff;
+  --role-supermodo: #2f9bff;
+  --role-modo: #3a6fff;
+
+  --word-found: #2aff80;
+  --word-wrong: #ff4c4c;
+  --role-fixed: #ffd36b;
+}
+
+
 /* Appliquer le même style que #discord à #accueil */
 /* Appliquer le même style que #discord à #accueil */
 #accueil {
@@ -185,17 +222,32 @@ section.active {
 }
 
 /* Couleurs rôles */
-.staff-member[data-role="Chef"] { color: #b10000; }
-.staff-member[data-role="Sous chef"] { color: #0cb254; }
-.staff-member[data-role="Administrateur"] { color: #47b2ff; }
-.staff-member[data-role="Super Modérateur"] { color: #087fff; }
-.staff-member[data-role="Modérateur"] { color: #004ae9 }
+.staff-member[data-role="Chef"] { color: var(--role-chef); }
+.staff-member[data-role="Sous chef"] { color: var(--role-sous-chef); }
+.staff-member[data-role="Administrateur"] { color: var(--role-admin); }
+.staff-member[data-role="Super Modérateur"] { color: var(--role-supermodo); }
+.staff-member[data-role="Modérateur"] { color: var(--role-modo); }
 
-.staff-member[data-role="Chef"] .staff-role { color: #b10000; }
-.staff-member[data-role="Sous chef"] .staff-role { color: #0cb254; }
-.staff-member[data-role="Administrateur"] .staff-role { color: #47b2ff; }
-.staff-member[data-role="Super Modérateur"] .staff-role { color: #087fff; }
-.staff-member[data-role="Modérateur"] .staff-role { color: #004ae9; }
+.staff-member[data-role="Chef"] .staff-role { color: var(--role-chef); }
+.staff-member[data-role="Sous chef"] .staff-role { color: var(--role-sous-chef); }
+.staff-member[data-role="Administrateur"] .staff-role { color: var(--role-admin); }
+.staff-member[data-role="Super Modérateur"] .staff-role { color: var(--role-supermodo); }
+.staff-member[data-role="Modérateur"] .staff-role { color: var(--role-modo); }
+
+.found-word {
+  color: var(--word-found);
+  font-weight: bold;
+}
+
+.wrong-word {
+  color: var(--word-wrong);
+  font-weight: bold;
+}
+
+.role-fixed {
+  color: var(--role-fixed);
+  font-weight: bold;
+}
 
 /* Règlement Discord */
 section#discord {
@@ -626,6 +678,44 @@ nav.open .tab-button:hover {
 }
 
 
+.customizer-panel {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background: #111;
+    color: white;
+    padding: 20px;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.6);
+    transition: right 0.3s ease;
+    z-index: 9999;
+    overflow-y: auto;
+  }
+
+  .customizer-panel.open {
+    right: 0;
+  }
+
+  .customizer-panel h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .customizer-panel label {
+    display: block;
+    margin: 10px 0 5px;
+  }
+
+  .customizer-panel input,
+  .customizer-panel select,
+  .customizer-panel button {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+
   </style>
 </head>
 <body>
@@ -643,6 +733,8 @@ nav.open .tab-button:hover {
   <button class="tab-button" data-target="bot">Bot</button> 
   <button class="tab-button" data-target="staff">Staff</button>
   <button class="tab-button" data-target="code">code</button>
+  <button onclick="toggleCustomizer()">Personnaliser</button>
+
 </nav>
 
 
@@ -815,7 +907,7 @@ nav.open .tab-button:hover {
 
   <p>
     Quand un mot est affiché <span class="found-word">en vert</span>, cela signifie qu’il a déjà été trouvé par quelqu’un d’autre.  
-    Par exemple : <span class="found-word">arbre</span> (trouvé).
+    Par exemple : <span class="code-text">arbre</span> (trouvé).
   </p>
 
   <p>
@@ -823,13 +915,73 @@ nav.open .tab-button:hover {
   </p>
 
   <p>
-    Si le code que vous avez trouvé est correct, vous recevrez le rôle <span class="chercheur">chercheur</span>.
+    Si le code que vous avez trouvé est correct, vous recevrez le rôle <span class="role-fixed">Chercheur</span>.
   </p>
 
   <p>
     <strong>Important :</strong> seuls deux codes seront publiés toutes les deux semaines, voire un mois.  
     Alors soyez rapides et attentifs pour ne pas les manquer !
   </p>
+
+ <!-- Panneau de personnalisation -->
+<div class="customizer-panel" id="customizerPanel">
+  <h2>🎨 Personnaliser le site</h2>
+
+  <label>Police du texte</label>
+  <select id="fontSelect">
+    <option value="Arial">Arial</option>
+    <option value="Verdana">Verdana</option>
+    <option value="'Courier New'">Courier New</option>
+    <option value="'Times New Roman'">Times New Roman</option>
+    <option value="'Trebuchet MS'">Trebuchet MS</option>
+    <option value="'Orbitron'">Orbitron</option>
+    <option value="'Comic Sans MS'">Comic Sans MS</option>
+    <option value="'Lucida Console'">Lucida Console</option>
+    <option value="'Noto Sans JP'">Noto Sans JP</option>
+    <option value="'Georgia'">Georgia</option>
+  </select>
+
+  <label>Couleur du texte</label>
+  <input type="color" id="textColorPicker">
+
+  <label>Couleur des boutons</label>
+  <input type="color" id="buttonColorPicker">
+
+  <label>Couleur de fond</label>
+  <input type="color" id="bgColorPicker">
+
+  <label>Rayon des coins (boutons)</label>
+  <input type="range" id="radiusPicker" min="0" max="30" value="10">
+
+  <label>Thème prédéfini</label>
+  <select id="themeSelect">
+    <option value="">-- Aucun --</option>
+    <option value="dark">Sombre</option>
+    <option value="light">Clair</option>
+    <option value="red">Rouge / Noir</option>
+    <option value="blue">Bleu / Blanc</option>
+    <option value="blzstars">BLZstars</option>
+    <option value="ocean">Océan</option>
+    <option value="espace">Espace</option>
+    <option value="feu">Feu</option>
+    <option value="neige">Neige</option>
+    <option value="cyberpunk">Cyberpunk</option>
+    <option value="japonais">Japonais</option>
+    <option value="retro">Rétro</option>
+    <option value="spacegray">Gris spatial</option>
+    <option value="sakura">Sakura</option>
+    <option value="toxic">Toxique</option>
+    <option value="sunset">Coucher de soleil</option>
+    <option value="hacker">Hacker</option>
+    <option value="forest">Forêt</option>
+    <option value="neon">Néon</option>
+    <option value="candy">Bonbon</option>
+  </select>
+
+  <button onclick="applyCustomization()">✅ Appliquer</button>
+  <button onclick="resetCustomization()">♻️ Réinitialiser</button>
+</div>
+
 
   
 </section>
@@ -1359,6 +1511,112 @@ if (searchInput) {
   });
 // Afficher toutes les vidéos au chargement
 displayVideos(videos);
+
+   const customizerPanel = document.getElementById('customizerPanel');
+
+function toggleCustomizer() {
+  customizerPanel.classList.toggle('open');
+}
+
+const elementsToStyle = {
+  buttons: () => document.querySelectorAll('button:not(.code-btn):not(.role-fixed)'),
+  text: () => document.querySelectorAll('body *:not(script):not(style):not(.code-text):not(.role-fixed)')
+};
+
+function applyTheme(theme) {
+  const themes = {
+    dark: { font: "Verdana", textColor: "#ffffff", buttonColor: "#444444", bgColor: "#111111" },
+    light: { font: "Arial", textColor: "#000000", buttonColor: "#dddddd", bgColor: "#ffffff" },
+    red: { font: "'Courier New'", textColor: "#ffdddd", buttonColor: "#660000", bgColor: "#220000" },
+    blue: { font: "'Times New Roman'", textColor: "#ddeeff", buttonColor: "#003366", bgColor: "#001122" },
+    blzstars: { font: "Arial", textColor: "#ffffff", buttonColor: "#0077ff", bgColor: "#0a0a0a" },
+    ocean: { font: "'Trebuchet MS'", textColor: "#e0ffff", buttonColor: "#007f9a", bgColor: "#002f4b" },
+    espace: { font: "'Orbitron'", textColor: "#cfcfff", buttonColor: "#333366", bgColor: "#000010" },
+    feu: { font: "'Impact'", textColor: "#ffccaa", buttonColor: "#cc3300", bgColor: "#330000" },
+    neige: { font: "'Segoe UI'", textColor: "#003366", buttonColor: "#cceeff", bgColor: "#ffffff" },
+    cyberpunk: { font: "'Lucida Console'", textColor: "#39ff14", buttonColor: "#ff00ff", bgColor: "#000000" },
+    japonais: { font: "'Noto Sans JP'", textColor: "#1f1f1f", buttonColor: "#ffcccc", bgColor: "#fff0f0" },
+    retro: { font: "'Courier New'", textColor: "#00ff00", buttonColor: "#000000", bgColor: "#111111" },
+    spacegray: { font: "'Helvetica Neue'", textColor: "#dddddd", buttonColor: "#444", bgColor: "#222" },
+    sakura: { font: "'Comic Sans MS'", textColor: "#d63384", buttonColor: "#ffc0cb", bgColor: "#fff0f5" },
+    toxic: { font: "'Consolas'", textColor: "#ccff00", buttonColor: "#333300", bgColor: "#111100" },
+    sunset: { font: "'Georgia'", textColor: "#ffcc99", buttonColor: "#ff9966", bgColor: "#330000" },
+    hacker: { font: "'Courier New'", textColor: "#00ff00", buttonColor: "#003300", bgColor: "#000000" },
+    forest: { font: "'Garamond'", textColor: "#e6ffe6", buttonColor: "#336633", bgColor: "#001a00" },
+    neon: { font: "'Arial Black'", textColor: "#ffffff", buttonColor: "#00ffff", bgColor: "#1a1a1a" },
+    candy: { font: "'Comic Sans MS'", textColor: "#ff66cc", buttonColor: "#ffccff", bgColor: "#ffe6f2" }
+  };
+
+  const t = themes[theme];
+  if (!t) return;
+
+  document.getElementById('fontSelect').value = t.font;
+  document.getElementById('textColorPicker').value = t.textColor;
+  document.getElementById('buttonColorPicker').value = t.buttonColor;
+  document.getElementById('bgColorPicker').value = t.bgColor;
+
+  applyCustomization(); // applique directement les couleurs
+}
+
+function applyCustomization(save = true) {
+  const font = document.getElementById('fontSelect').value;
+  const textColor = document.getElementById('textColorPicker').value;
+  const buttonColor = document.getElementById('buttonColorPicker').value;
+  const bgColor = document.getElementById('bgColorPicker').value;
+  const borderRadius = document.getElementById('radiusPicker').value;
+
+  // Texte global
+  elementsToStyle.text().forEach(el => {
+    el.style.fontFamily = font;
+    el.style.color = textColor;
+  });
+
+  // Boutons
+  elementsToStyle.buttons().forEach(el => {
+    el.style.backgroundColor = buttonColor;
+    el.style.color = textColor;
+    el.style.border = "none";
+    el.style.borderRadius = borderRadius + "px";
+    el.style.boxShadow = "0 0 10px rgba(0,0,0,0.5)";
+  });
+
+  // Fond du site
+  document.body.style.backgroundColor = bgColor;
+
+  if (save) {
+    localStorage.setItem('blz_custom_style', JSON.stringify({ font, textColor, buttonColor, bgColor, borderRadius }));
+  }
+}
+
+function resetCustomization() {
+  localStorage.removeItem('blz_custom_style');
+  location.reload();
+}
+
+function loadSavedCustomization() {
+  const saved = localStorage.getItem('blz_custom_style');
+  if (!saved) return;
+  const { font, textColor, buttonColor, bgColor, borderRadius } = JSON.parse(saved);
+
+  document.getElementById('fontSelect').value = font;
+  document.getElementById('textColorPicker').value = textColor;
+  document.getElementById('buttonColorPicker').value = buttonColor;
+  document.getElementById('bgColorPicker').value = bgColor;
+  document.getElementById('radiusPicker').value = borderRadius;
+
+  applyCustomization(false);
+}
+
+document.getElementById('themeSelect').addEventListener('change', (e) => {
+  if (e.target.value) {
+    applyTheme(e.target.value);
+  }
+});
+
+window.addEventListener('load', () => {
+  loadSavedCustomization();
+});
+
 
 
 </script>

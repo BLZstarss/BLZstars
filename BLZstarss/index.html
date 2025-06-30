@@ -333,45 +333,79 @@ section.active {
 }
 
 /* Couleurs des pseudos et rôles */
-.staff-member[data-role="Chef"] .staff-name,
-.staff-member[data-role="Chef"] .staff-role { 
-  color: var(--role-chef);
-  text-shadow: 0 0 8px rgba(177, 0, 0, 0.3);
+.staff-name {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+  font-size: 1.1em;
 }
 
-.staff-member[data-role="Sous chef"] .staff-name,
-.staff-member[data-role="Sous chef"] .staff-role { 
-  color: var(--role-sous-chef);
-  text-shadow: 0 0 8px rgba(12, 178, 84, 0.3);
+.emoji {
+  color: inherit;
+  filter: none;
 }
 
-.staff-member[data-role="Administrateur"] .staff-name,
-.staff-member[data-role="Administrateur"] .staff-role { 
-  color: var(--role-admin);
-  text-shadow: 0 0 8px rgba(71, 178, 255, 0.3);
+/* Nom + Rôle : Chef */
+.staff-member[data-role="Chef"] .name-text,
+.staff-member[data-role="Chef"] .staff-role {
+  background: linear-gradient(90deg, #ff0004 , #550003);
+  background-clip: text;
+  color: transparent;
 }
 
-.staff-member[data-role="Super Modérateur"] .staff-name,
-.staff-member[data-role="Super Modérateur"] .staff-role { 
-  color: var(--role-supermodo);
-  text-shadow: 0 0 8px rgba(8, 127, 255, 0.3);
+/* Nom + Rôle : Sous chef */
+.staff-member[data-role="Sous chef"] .name-text,
+.staff-member[data-role="Sous chef"] .staff-role {
+  background: linear-gradient(90deg, #00ff6a , #008d36);
+  background-clip: text;
+  color: transparent;
 }
 
-.staff-member[data-role="Modérateur"] .staff-name,
-.staff-member[data-role="Modérateur"] .staff-role { 
-  color: var(--role-modo);
-  text-shadow: 0 0 8px rgba(0, 74, 233, 0.3);
+/* Nom + Rôle : Administrateur */
+.staff-member[data-role="Administrateur"] .name-text,
+.staff-member[data-role="Administrateur"] .staff-role {
+  background: linear-gradient(90deg, #fa5654, #c30000);
+  background-clip: text;
+  color: transparent;
 }
+
+/* Nom + Rôle : Super Modérateur */
+.staff-member[data-role="Super Modérateur"] .name-text,
+.staff-member[data-role="Super Modérateur"] .staff-role {
+  background: linear-gradient(90deg, #f8780a, #ff3800);
+  background-clip: text;
+  color: transparent;
+}
+
+/* Nom + Rôle : Modérateur */
+.staff-member[data-role="Modérateur"] .name-text,
+.staff-member[data-role="Modérateur"] .staff-role {
+  background: linear-gradient(90deg, #9c4900, #d9a325);
+  background-clip: text;
+  color: transparent;
+}
+
+
+/* Rôles */
+
+.staff-role {
+  font-style: italic;
+  font-size: 0.95em;
+}
+
+/* Effets au survol */
 
 .staff-member:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgb(211 47 47 / 0.25);
 }
 
-.staff-member:hover .staff-name {
+.staff-member:hover .name-text {
   filter: brightness(1.2);
-  text-shadow: 0 0 12px currentColor;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
 }
+
 
 .found-word {
   color: var(--word-found);
@@ -661,49 +695,43 @@ section#discord {
 }
 
 /* Style personnalisé pour la barre de recherche bot quand active */
-#bot-search:focus {
-  box-shadow: 0 0 8px #ffc107bb;
-  background-color: #353535;
-  color: #fff;
-}
-
-
 #code {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #7f7f7f;
-    font-size: 18px;
-    line-height: 1.6;
-    padding: 25px 30px;
-    border-radius: 10px;
+    background: linear-gradient(to right, #1f1f1f, #2c2c2c);
+    padding: 30px;
+    border-radius: 15px;
+    color: #f0f0f0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
     max-width: 800px;
-    min-height: 350px;
-    width: 85%;
-    margin: 30px auto;
-    text-align: left;
-    box-sizing: border-box;
-    overflow-wrap: break-word; /* évite le dépassement des mots trop longs */
-    background-color: #1a1a1a; /* fond foncé (optionnel) */
-}
+    margin: 40px auto;
+  }
 
-#code .chercheur {
-    color: #de788b; /* rose */
-    font-weight: bold;
-}
+  #code h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #ff5050;
+    border-bottom: 2px solid #ff5050;
+    padding-bottom: 10px;
+  }
 
-#code .wrong-word {
-    color: #ff0000; /* rouge vif */
-    font-weight: bold;
-}
+  #code p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-size: 16px;
+  }
 
-#code p {
-    background-color: #2a2a2a;
-    padding: 12px 15px;
-    border-left: 4px solid #d32f2f;
-    border-radius: 6px;
-    margin-bottom: 12px;
-    color: #ddd;
-    transition: background 0.3s;
-}
+  #code strong {
+    color: #ffd700;
+  }
+
+  #code a {
+    color: #00bfff;
+    text-decoration: underline;
+  }
+
+  #code a:hover {
+    color: #ffffff;
+  }
 
 .highlight {
     color: #ff0000;
@@ -976,95 +1004,101 @@ nav.open .tab-button:hover {
 
   <!-- Staff -->
   <section id="staff">
-    <div class="staff-container">
-      <div class="staff-container">
-        <div class="staff-member" data-role="Chef">
-          <div class="staff-name">👑 BLZstarss</div>
-          <div class="staff-role">Rôle : Chef</div>
-        </div>
-        <div class="staff-member" data-role="Sous chef">
-          <div class="staff-name">🥈 Aviator_man</div>
-          <div class="staff-role">Rôle : Sous-chef</div>
-        </div>
-        <div class="staff-member" data-role="Administrateur">
-          <div class="staff-name">🛠️ Narakys</div>
-          <div class="staff-role">Rôle : Administrateur</div>
-        </div>
-        <div class="staff-member" data-role="Administrateur">
-          <div class="staff-name">🛠️ Lapai</div>
-          <div class="staff-role">Rôle : Administrateur</div>
-        </div>
-        <div class="staff-member" data-role="Administrateur">
-          <div class="staff-name">🛠️ Zibul</div>
-          <div class="staff-role">Rôle : Administrateur</div>
-        </div>
-        <div class="staff-member" data-role="Super Modérateur">
-          <div class="staff-name">⭐ Abder</div>
-          <div class="staff-role">Rôle : Super Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Super Modérateur">
-          <div class="staff-name">⭐ Vore</div>
-          <div class="staff-role">Rôle : Super Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Super Modérateur">
-          <div class="staff-name">⭐ Rosalune</div>
-          <div class="staff-role">Rôle : Super Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Modérateur">
-          <div class="staff-name">🔨 Tosco</div>
-          <div class="staff-role">Rôle : Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Modérateur">
-          <div class="staff-name">🔨 Nocturno</div>
-          <div class="staff-role">Rôle : Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Modérateur">
-          <div class="staff-name">🔨 Gabz</div>
-          <div class="staff-role">Rôle : Modérateur</div>
-        </div><div class="staff-member" data-role="Modérateur">
-          <div class="staff-name">🔨 Richard</div>
-          <div class="staff-role">Rôle : Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Modérateur">
-          <div class="staff-name">🔨 Koyorin</div>
-          <div class="staff-role">Rôle : Modérateur</div>
-        </div>
-        <div class="staff-member" data-role="Modérateur">
-          <div class="staff-name">🔨 Lanful</div>
-          <div class="staff-role">Rôle : Modérateur</div>
-        </div>
-      </div>
+  <div class="staff-container">
+    <div class="staff-member" data-role="Chef">
+      <div class="staff-name"><span class="emoji">👑</span><span class="name-text">BLZstarss</span></div>
+      <div class="staff-role">Rôle : Chef</div>
     </div>
-  </section>
 
-  <!-- code -->
-  <section id="code" class="active">
+    <div class="staff-member" data-role="Sous chef">
+      <div class="staff-name"><span class="emoji">🥈</span><span class="name-text">Aviator_man</span></div>
+      <div class="staff-role">Rôle : Sous-chef</div>
+    </div>
+
+    <div class="staff-member" data-role="Administrateur">
+      <div class="staff-name"><span class="emoji">🛠️</span><span class="name-text">Narakys</span></div>
+      <div class="staff-role">Rôle : Administrateur</div>
+    </div>
+
+    <div class="staff-member" data-role="Administrateur">
+      <div class="staff-name"><span class="emoji">🛠️</span><span class="name-text">Lapai</span></div>
+      <div class="staff-role">Rôle : Administrateur</div>
+    </div>
+
+    <div class="staff-member" data-role="Administrateur">
+      <div class="staff-name"><span class="emoji">🛠️</span><span class="name-text">Zibul</span></div>
+      <div class="staff-role">Rôle : Administrateur</div>
+    </div>
+
+    <div class="staff-member" data-role="Super Modérateur">
+      <div class="staff-name"><span class="emoji">⭐</span><span class="name-text">Abder</span></div>
+      <div class="staff-role">Rôle : Super Modérateur</div>
+    </div>
+
+    <div class="staff-member" data-role="Super Modérateur">
+      <div class="staff-name"><span class="emoji">⭐</span><span class="name-text">Vore</span></div>
+      <div class="staff-role">Rôle : Super Modérateur</div>
+    </div>
+
+    <div class="staff-member" data-role="Super Modérateur">
+      <div class="staff-name"><span class="emoji">⭐</span><span class="name-text">Rosalune</span></div>
+      <div class="staff-role">Rôle : Super Modérateur</div>
+    </div>
+
+    <div class="staff-member" data-role="Modérateur">
+      <div class="staff-name"><span class="emoji">🔨</span><span class="name-text">Tosco</span></div>
+      <div class="staff-role">Rôle : Modérateur</div>
+    </div>
+
+    <div class="staff-member" data-role="Modérateur">
+      <div class="staff-name"><span class="emoji">🔨</span><span class="name-text">Nocturno</span></div>
+      <div class="staff-role">Rôle : Modérateur</div>
+    </div>
+
+    <div class="staff-member" data-role="Modérateur">
+      <div class="staff-name"><span class="emoji">🔨</span><span class="name-text">Gabz</span></div>
+      <div class="staff-role">Rôle : Modérateur</div>
+    </div>
+
+    <div class="staff-member" data-role="Modérateur">
+      <div class="staff-name"><span class="emoji">🔨</span><span class="name-text">Richard</span></div>
+      <div class="staff-role">Rôle : Modérateur</div>
+    </div>
+
+    <div class="staff-member" data-role="Modérateur">
+      <div class="staff-name"><span class="emoji">🔨</span><span class="name-text">Koyorin</span></div>
+      <div class="staff-role">Rôle : Modérateur</div>
+    </div>
+
+    <div class="staff-member" data-role="Modérateur">
+      <div class="staff-name"><span class="emoji">🔨</span><span class="name-text">Lanful</span></div>
+      <div class="staff-role">Rôle : Modérateur</div>
+    </div>
+  </div>
+</section>
+
+ <section id="code">
+  <h2>Information sur la mise en pause</h2>
   <p>
-    Coucou ! En fait, le <strong>système de code</strong>, c'est un petit jeu sur le site.
+    Cette partie du site ou ce jeu est actuellement en <strong>pause</strong>. Nous sommes en pleine discussion avec le staff du serveur pour décider de la suite du projet.
   </p>
-
   <p>
-    Votre mission est de <strong>chercher un mot précis</strong> qui apparaîtra <span class="wrong-word">en rouge</span> quelque part sur le site.
+    Plusieurs options sont à l’étude : La possibilité de <strong>supprimer</strong> ce jeu. Rien n’est encore confirmé.
   </p>
-
   <p>
-    Quand un mot est affiché <span class="found-word">en vert</span>, cela signifie qu'il a déjà été trouvé par quelqu'un d'autre.  
-    Par exemple : <span class="code-text">arbre</span> (trouvé).
+     Grâce à ce jeu, vous pourrez obtenir un rôle exclusif sur Discord.
   </p>
-
   <p>
-    Une fois que vous avez trouvé ce mot, rendez-vous sur notre serveur Discord et ouvrez un <strong>ticket</strong> disponible sur le serveur.
+    Nous préférons prendre le temps de bien réfléchir à l’avenir pour offrir la meilleure expérience possible à la communauté.
   </p>
-
   <p>
-    Si le code que vous avez trouvé est correct, vous recevrez le rôle <span class="role-fixed">Chercheur</span>.
+    Merci pour votre patience et votre soutien continu !
   </p>
-
   <p>
-    <strong>Important :</strong> seuls deux codes seront publiés toutes les deux semaines, voire un mois.  
-    Alors soyez rapides et attentifs pour ne pas les manquer !
+    Pour suivre l’évolution ou poser vos questions, rejoignez-nous sur le serveur Discord :
+    <a href="https://discord.gg/UarWXUgXJE" target="_blank"><strong>Lien du serveur Discord</strong></a>
   </p>
-
+</section>
   
 </section>
 
@@ -1374,7 +1408,7 @@ const botCommands = [
   },
   {
     title: "bug",
-    status: "En réparation",
+    status: "Disponible",
     description: "quand vous remarquez un bug vous pouvez l'exécuter en détaillant le plus possible le problème je recevrais un message pour que je puisse régler le bug !."
   },
     {
@@ -1389,7 +1423,7 @@ const botCommands = [
   },
     {
     title: "stats",
-    status: "En réparation",
+    status: "Disponible",
     description: "cela vous permet de voir les statistiques principales comme les modérateur, les modérateur en ligne etc."
   }
 ];
@@ -1605,7 +1639,7 @@ if (searchInput) {
     });
   });
 // Afficher toutes les vidéos au chargement
-displayVideos(videos);
+displayVideos(videos);  
 
 
 </script>
